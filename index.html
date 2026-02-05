@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code It Out - Coding Challenge Platform</title>
+    <link rel="stylesheet" href="styles.css?v=5">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Pyodide for Python execution -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+
+    <!-- Completion Sound -->
+    <audio id="completionSound" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Grading Result Popup -->
+    <div class="grading-popup" id="gradingPopup">
+        <div class="grading-popup-content">
+            <div class="grading-popup-header" id="gradingPopupHeader">
+                <span class="grading-status-icon" id="gradingStatusIcon">⏳</span>
+                <h2 id="gradingPopupTitle">Grading...</h2>
+            </div>
+            <div class="grading-popup-body">
+                <div class="grading-points-display" id="gradingPointsDisplay">
+                    <span class="points-earned" id="pointsEarned">0</span>
+                    <span class="points-max" id="pointsMax">/ 0 pts</span>
+                </div>
+                <div class="grading-explanation" id="gradingExplanation">
+                    Analyzing your solution...
+                </div>
+                <div class="grading-hint" id="gradingHint" style="display: none;">
+                </div>
+            </div>
+            <div class="grading-popup-footer">
+                <button class="btn btn-primary" id="closeGradingBtn" onclick="closeGradingPopup()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Victory Modal -->
+    <div class="victory-modal" id="victoryModal">
+        <div class="victory-content">
+            <div class="victory-icon">🏆</div>
+            <h1>Congratulations!</h1>
+            <p>You've completed all challenges!</p>
+            <div class="final-score" id="finalScore">0</div>
+            <p class="score-label">Total Points</p>
+            <div class="score-breakdown" id="scoreBreakdown"></div>
+            <button class="btn btn-primary" onclick="closeVictoryModal()">Continue</button>
+        </div>
+    </div>
+
+    <!-- API Key Modal -->
+    <div class="api-modal" id="apiModal">
+        <div class="api-modal-content">
+            <h2>🔑 Enter Claude API Key</h2>
+            <p>To grade your solutions, please enter your Anthropic API key.</p>
+            <input type="password" id="apiKeyInput" placeholder="sk-ant-..." />
+            <div class="api-modal-actions">
+                <button class="btn btn-secondary" onclick="closeApiModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveApiKey()">Save Key</button>
+            </div>
+            <p class="api-note">Your API key is stored locally and never sent to any server except Anthropic.</p>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="logo">⚡</span>
+            <span class="brand-name">Code It Out</span>
+        </div>
+        <div class="score-display">
+            <span class="score-icon">🏅</span>
+            <span class="score-value" id="totalScore">0</span>
+            <span class="score-max">/ 87 pts</span>
+            <span class="problems-completed" id="problemsCompleted">(0/15)</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link active" data-filter="all">All Problems</a>
+            <a href="#" class="nav-link" data-filter="easy">Easy</a>
+            <a href="#" class="nav-link" data-filter="medium">Medium</a>
+            <a href="#" class="nav-link" data-filter="hard">Hard</a>
+            <a href="rubric.html" class="nav-link rubric-link">📋 Grading Criteria</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Problems</h2>
+                <span class="problem-count">15 Problems</span>
+            </div>
+            <ul class="problem-list" id="problemList">
+                <!-- Problems will be populated by JavaScript -->
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="problem-view" id="problemView">
+                <div class="welcome-screen" id="welcomeScreen">
+                    <h1>Welcome to Code It Out! 🚀</h1>
+                    <p>Select a problem from the sidebar to get started.</p>
+                    <div class="difficulty-legend">
+                        <span class="badge easy">Easy</span>
+                        <span class="badge medium">Medium</span>
+                        <span class="badge hard">Hard</span>
+                    </div>
+                </div>
+
+                <div class="problem-container" id="problemContainer" style="display: none;">
+                    <div class="problem-header">
+                        <div class="problem-title-section">
+                            <h1 id="problemTitle"></h1>
+                            <span class="badge" id="problemDifficulty"></span>
+                        </div>
+                    </div>
+
+                    <div class="split-view">
+                        <div class="problem-description" id="problemDescription">
+                            <!-- Problem description will be populated here -->
+                        </div>
+
+                        <div class="code-editor-section">
+                            <div class="editor-header">
+                                <div class="language-selector">
+                                    <label for="languageSelect">Language:</label>
+                                    <select id="languageSelect">
+                                        <option value="python">Python</option>
+                                        <option value="javascript">JavaScript</option>
+                                        <option value="java">Java</option>
+                                        <option value="cpp">C++</option>
+                                    </select>
+                                </div>
+                                <div class="editor-actions">
+                                    <button class="btn btn-secondary" id="resetBtn">Reset</button>
+                                    <button class="btn btn-primary" id="runBtn">▶ Run Code</button>
+                                    <button class="btn btn-success" id="submitBtn">✓ Submit for Grading</button>
+                                </div>
+                            </div>
+                            <div class="editor-wrapper">
+                                <textarea id="codeEditor" class="code-editor" spellcheck="false"></textarea>
+                            </div>
+                            <div class="output-section">
+                                <div class="output-header">
+                                    <h3>Output</h3>
+                                    <button class="btn btn-small" id="clearOutput">Clear</button>
+                                </div>
+                                <pre id="outputArea" class="output-area">Run your code to see output here...</pre>
+                            </div>
+
+                            <div class="editor-status" id="editorStatus"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="problems.js?v=5"></script>
+    <script src="grading.js?v=5"></script>
+    <script src="app.js?v=5"></script>
+</body>
+</html>
