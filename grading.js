@@ -1,10 +1,8 @@
 // Claude AI Grading System
 // Points: Easy = 2, Medium = 5, Hard = 10
 
-// ============================================
-// ADD YOUR ANTHROPIC API KEY HERE:
-const ANTHROPIC_API_KEY = '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';  // <-- Paste your key here, e.g., 'sk-ant-api03-...'
-// ============================================
+// API Key is loaded from config.js (keep that file secret!)
+const ANTHROPIC_API_KEY = typeof CONFIG !== 'undefined' ? CONFIG.ANTHROPIC_API_KEY : '';
 
 const POINTS = {
     easy: 2,

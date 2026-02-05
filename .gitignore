@@ -1,0 +1,9 @@
+# Secret files - DO NOT COMMIT
+config.js
+
+# OS files
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
