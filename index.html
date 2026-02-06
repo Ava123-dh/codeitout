@@ -75,8 +75,8 @@
         <div class="score-display">
             <span class="score-icon">🏅</span>
             <span class="score-value" id="totalScore">0</span>
-            <span class="score-max">/ 87 pts</span>
-            <span class="problems-completed" id="problemsCompleted">(0/15)</span>
+            <span class="score-max">/ 143 pts</span>
+            <span class="problems-completed" id="problemsCompleted">(0/20)</span>
         </div>
         <div class="nav-links">
             <a href="#" class="nav-link active" data-filter="all">All Problems</a>
@@ -135,12 +135,14 @@
                                     </select>
                                 </div>
                                 <div class="editor-actions">
+                                    <button class="btn btn-icon" id="fullscreenBtn" title="Toggle Fullscreen">⛶</button>
                                     <button class="btn btn-secondary" id="resetBtn">Reset</button>
                                     <button class="btn btn-primary" id="runBtn">▶ Run Code</button>
                                     <button class="btn btn-success" id="submitBtn">✓ Submit for Grading</button>
                                 </div>
                             </div>
                             <div class="editor-wrapper">
+                                <div class="line-numbers" id="lineNumbers"></div>
                                 <textarea id="codeEditor" class="code-editor" spellcheck="false"></textarea>
                             </div>
                             <div class="output-section">

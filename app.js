@@ -14,6 +14,10 @@ const resetBtn = document.getElementById('resetBtn');
 const clearOutput = document.getElementById('clearOutput');
 const outputArea = document.getElementById('outputArea');
 const navLinks = document.querySelectorAll('.nav-link');
+const lineNumbers = document.getElementById('lineNumbers');
+const fullscreenBtn = document.getElementById('fullscreenBtn');
+const prettyPrintBtn = document.getElementById('prettyPrintBtn');
+const codeEditorSection = document.querySelector('.code-editor-section');
 
 // State
 let currentProblem = null;
@@ -22,6 +26,174 @@ let currentLanguage = 'python'; // Track current language for saving
 let savedCode = {}; // Store user code per problem and language
 let pyodide = null; // Pyodide instance for Python execution
 let pyodideLoading = false;
+
+// Update line numbers
+function updateLineNumbers() {
+    const lines = codeEditor.value.split('\n');
+    const lineCount = lines.length;
+    let numbersHTML = '';
+    for (let i = 1; i <= lineCount; i++) {
+        numbersHTML += `<span>${i}</span>`;
+    }
+    lineNumbers.innerHTML = numbersHTML;
+}
+
+// Sync scroll between editor and line numbers
+function syncScroll() {
+    lineNumbers.scrollTop = codeEditor.scrollTop;
+}
+
+// Toggle fullscreen mode for code editor
+function toggleFullscreen() {
+    if (!codeEditorSection) return;
+    codeEditorSection.classList.toggle('fullscreen');
+    
+    if (codeEditorSection.classList.contains('fullscreen')) {
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.title = 'Exit Fullscreen (Esc)';
+    } else {
+        fullscreenBtn.textContent = '⛶';
+        fullscreenBtn.title = 'Toggle Fullscreen';
+    }
+    
+    // Update line numbers after resize
+    setTimeout(updateLineNumbers, 100);
+}
+
+// Pretty print / format code
+function prettyPrintCode() {
+    if (!currentProblem) return;
+    
+    const code = codeEditor.value;
+    const language = languageSelect.value;
+    let formatted = code;
+    
+    try {
+        if (language === 'python') {
+            formatted = formatPython(code);
+        } else if (language === 'javascript') {
+            formatted = formatJavaScript(code);
+        } else if (language === 'java' || language === 'cpp') {
+            formatted = formatCStyle(code);
+        }
+        
+        codeEditor.value = formatted;
+        updateLineNumbers();
+        saveCurrentCode();
+        
+        // Show feedback
+        outputArea.textContent = '✨ Code formatted!';
+        outputArea.classList.remove('error');
+        setTimeout(() => {
+            outputArea.textContent = 'Run your code to see output here...';
+        }, 1500);
+    } catch (error) {
+        outputArea.textContent = 'Could not format code: ' + error.message;
+        outputArea.classList.add('error');
+    }
+}
+
+// Format Python code
+function formatPython(code) {
+    const lines = code.split('\n');
+    const formatted = [];
+    let indentLevel = 0;
+    const indentSize = 4;
+    
+    for (let line of lines) {
+        let trimmed = line.trim();
+        
+        // Skip empty lines but preserve them
+        if (trimmed === '') {
+            formatted.push('');
+            continue;
+        }
+        
+        // Decrease indent for lines starting with closing keywords
+        if (trimmed.startsWith('elif ') || trimmed.startsWith('else:') || 
+            trimmed.startsWith('except') || trimmed.startsWith('finally:') ||
+            trimmed.startsWith('elif:')) {
+            indentLevel = Math.max(0, indentLevel - 1);
+        }
+        
+        // Decrease indent for dedent keywords
+        if (trimmed === 'pass' || trimmed === 'break' || trimmed === 'continue' ||
+            trimmed.startsWith('return ') || trimmed === 'return') {
+            // Keep current indent
+        }
+        
+        // Check for closing brackets/parens that decrease indent
+        if (trimmed.startsWith(')') || trimmed.startsWith(']') || trimmed.startsWith('}')) {
+            indentLevel = Math.max(0, indentLevel - 1);
+        }
+        
+        // Add proper indentation
+        const indent = ' '.repeat(indentLevel * indentSize);
+        formatted.push(indent + trimmed);
+        
+        // Increase indent after colon (for blocks)
+        if (trimmed.endsWith(':') && !trimmed.startsWith('#')) {
+            indentLevel++;
+        }
+        
+        // Handle opening brackets
+        if ((trimmed.endsWith('(') || trimmed.endsWith('[') || trimmed.endsWith('{')) &&
+            !trimmed.includes(')') && !trimmed.includes(']') && !trimmed.includes('}')) {
+            indentLevel++;
+        }
+    }
+    
+    return formatted.join('\n');
+}
+
+// Format JavaScript code
+function formatJavaScript(code) {
+    return formatCStyle(code);
+}
+
+// Format C-style languages (JavaScript, Java, C++)
+function formatCStyle(code) {
+    const lines = code.split('\n');
+    const formatted = [];
+    let indentLevel = 0;
+    const indentSize = 4;
+    
+    for (let line of lines) {
+        let trimmed = line.trim();
+        
+        // Skip empty lines but preserve them
+        if (trimmed === '') {
+            formatted.push('');
+            continue;
+        }
+        
+        // Decrease indent for closing braces
+        if (trimmed.startsWith('}') || trimmed.startsWith(')') || trimmed.startsWith(']')) {
+            indentLevel = Math.max(0, indentLevel - 1);
+        }
+        
+        // Handle else, else if, catch, finally on same indent as if/try
+        if (trimmed.startsWith('else') || trimmed.startsWith('catch') || trimmed.startsWith('finally')) {
+            // Keep at decreased level
+        }
+        
+        // Add proper indentation
+        const indent = ' '.repeat(indentLevel * indentSize);
+        formatted.push(indent + trimmed);
+        
+        // Increase indent after opening braces
+        if (trimmed.endsWith('{') || trimmed.endsWith('(') && !trimmed.includes(')')) {
+            indentLevel++;
+        }
+        
+        // Handle case/default in switch statements
+        if (trimmed.startsWith('case ') || trimmed.startsWith('default:')) {
+            // Keep indent level
+        }
+    }
+    
+    return formatted.join('\n');
+}
 
 // Initialize Pyodide
 async function initPyodide() {
@@ -143,6 +315,7 @@ function loadCodeForProblem() {
     } else {
         codeEditor.value = currentProblem.starterCode[language] || '';
     }
+    updateLineNumbers();
 }
 
 // Save current code to state
@@ -171,6 +344,7 @@ function resetCode() {
     const key = `${currentProblem.id}_${language}`;
     delete savedCode[key];
     localStorage.setItem('savedCode', JSON.stringify(savedCode));
+    updateLineNumbers();
 }
 
 // Run code (simulated - shows helpful message)
@@ -454,6 +628,7 @@ function setupEventListeners() {
         // Update current language and load new code
         currentLanguage = languageSelect.value;
         loadCodeForProblem();
+        updateLineNumbers();
     });
     
     // Run button
@@ -491,8 +666,181 @@ function setupEventListeners() {
         });
     });
     
-    // Auto-save on code change
-    codeEditor.addEventListener('input', debounce(saveCurrentCode, 1000));
+    // Auto-save on code change and update line numbers
+    codeEditor.addEventListener('input', (e) => {
+        updateLineNumbers();
+        debounce(saveCurrentCode, 1000)();
+        
+        // Auto-dedent when typing closing brackets
+        const cursorPos = codeEditor.selectionStart;
+        const value = codeEditor.value;
+        const charTyped = value.charAt(cursorPos - 1);
+        
+        if (charTyped === '}' || charTyped === ')' || charTyped === ']') {
+            // Get current line start
+            const lineStart = value.lastIndexOf('\n', cursorPos - 1) + 1;
+            const beforeCursor = value.substring(lineStart, cursorPos);
+            
+            // If the line only has whitespace before the closing bracket
+            if (/^\s*[\}\)\]]$/.test(beforeCursor)) {
+                // Find matching indent level by counting brackets
+                const textBefore = value.substring(0, lineStart);
+                const lines = textBefore.split('\n');
+                
+                // Find the line with the opening bracket
+                let openCount = 0;
+                let targetIndent = '';
+                const openBracket = charTyped === '}' ? '{' : (charTyped === ')' ? '(' : '[');
+                
+                for (let i = lines.length - 1; i >= 0; i--) {
+                    const line = lines[i];
+                    for (let j = line.length - 1; j >= 0; j--) {
+                        const c = line[j];
+                        if (c === charTyped) openCount++;
+                        if (c === openBracket) {
+                            if (openCount === 0) {
+                                // Found matching bracket
+                                const indentMatch = line.match(/^(\s*)/);
+                                targetIndent = indentMatch ? indentMatch[1] : '';
+                                break;
+                            }
+                            openCount--;
+                        }
+                    }
+                    if (targetIndent !== '' || (lines[i].includes(openBracket) && openCount < 0)) {
+                        const indentMatch = lines[i].match(/^(\s*)/);
+                        targetIndent = indentMatch ? indentMatch[1] : '';
+                        break;
+                    }
+                }
+                
+                // Replace the current line's indentation
+                const newLine = targetIndent + charTyped;
+                const newValue = value.substring(0, lineStart) + newLine + value.substring(cursorPos);
+                const newCursorPos = lineStart + newLine.length;
+                
+                codeEditor.value = newValue;
+                codeEditor.selectionStart = codeEditor.selectionEnd = newCursorPos;
+                updateLineNumbers();
+            }
+        }
+    });
+    
+    // Sync scroll between editor and line numbers
+    codeEditor.addEventListener('scroll', syncScroll);
+    
+    // Handle Tab key for proper indentation and auto-indent on Enter
+    codeEditor.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+            e.preventDefault();
+            const start = codeEditor.selectionStart;
+            const end = codeEditor.selectionEnd;
+            
+            // Shift+Tab to dedent
+            if (e.shiftKey) {
+                const value = codeEditor.value;
+                const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+                const lineContent = value.substring(lineStart);
+                
+                if (lineContent.startsWith('    ')) {
+                    codeEditor.value = value.substring(0, lineStart) + lineContent.substring(4);
+                    codeEditor.selectionStart = codeEditor.selectionEnd = Math.max(lineStart, start - 4);
+                } else if (lineContent.startsWith('\t')) {
+                    codeEditor.value = value.substring(0, lineStart) + lineContent.substring(1);
+                    codeEditor.selectionStart = codeEditor.selectionEnd = Math.max(lineStart, start - 1);
+                }
+            } else {
+                codeEditor.value = codeEditor.value.substring(0, start) + '    ' + codeEditor.value.substring(end);
+                codeEditor.selectionStart = codeEditor.selectionEnd = start + 4;
+            }
+            updateLineNumbers();
+        }
+        
+        // Auto-indent on Enter
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            const start = codeEditor.selectionStart;
+            const value = codeEditor.value;
+            
+            // Get current line
+            const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+            const currentLine = value.substring(lineStart, start);
+            
+            // Get current indentation
+            const indentMatch = currentLine.match(/^(\s*)/);
+            let indent = indentMatch ? indentMatch[1] : '';
+            
+            // Check if we should add extra indent (after {, :, (, [)
+            const trimmedLine = currentLine.trim();
+            const lastChar = trimmedLine.slice(-1);
+            const language = languageSelect.value;
+            
+            const shouldIndent = 
+                lastChar === '{' || 
+                lastChar === '[' || 
+                lastChar === '(' ||
+                (lastChar === ':' && (language === 'python'));
+            
+            if (shouldIndent) {
+                indent += '    ';
+            }
+            
+            // Check if cursor is between brackets like {} or ()
+            const charAfter = value.charAt(start);
+            const charBefore = value.charAt(start - 1);
+            const isBetweenBrackets = 
+                (charBefore === '{' && charAfter === '}') ||
+                (charBefore === '(' && charAfter === ')') ||
+                (charBefore === '[' && charAfter === ']');
+            
+            if (isBetweenBrackets) {
+                // Add new line with indent, then another line with closing bracket
+                const baseIndent = indentMatch ? indentMatch[1] : '';
+                const newValue = value.substring(0, start) + '\n' + indent + '\n' + baseIndent + value.substring(start);
+                codeEditor.value = newValue;
+                codeEditor.selectionStart = codeEditor.selectionEnd = start + 1 + indent.length;
+            } else {
+                // Insert newline with proper indentation
+                const newValue = value.substring(0, start) + '\n' + indent + value.substring(start);
+                codeEditor.value = newValue;
+                codeEditor.selectionStart = codeEditor.selectionEnd = start + 1 + indent.length;
+            }
+            updateLineNumbers();
+        }
+        
+        // Backspace to remove 4 spaces at once if at indent
+        if (e.key === 'Backspace') {
+            const start = codeEditor.selectionStart;
+            const end = codeEditor.selectionEnd;
+            
+            if (start === end && start >= 4) {
+                const value = codeEditor.value;
+                const lineStart = value.lastIndexOf('\n', start - 1) + 1;
+                const beforeCursor = value.substring(lineStart, start);
+                
+                // If only spaces before cursor and multiple of 4
+                if (/^\s+$/.test(beforeCursor) && beforeCursor.length % 4 === 0) {
+                    e.preventDefault();
+                    codeEditor.value = value.substring(0, start - 4) + value.substring(start);
+                    codeEditor.selectionStart = codeEditor.selectionEnd = start - 4;
+                    updateLineNumbers();
+                }
+            }
+        }
+    });
+    
+    // Pretty print button
+    prettyPrintBtn.addEventListener('click', prettyPrintCode);
+    
+    // Fullscreen toggle
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    
+    // Escape key to exit fullscreen
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && codeEditorSection && codeEditorSection.classList.contains('fullscreen')) {
+            toggleFullscreen();
+        }
+    });
     
     // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
@@ -511,6 +859,12 @@ function setupEventListeners() {
             setTimeout(() => {
                 outputArea.textContent = 'Run your code to see output here...';
             }, 1500);
+        }
+        
+        // Ctrl/Cmd + Shift + F to format code
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'f') {
+            e.preventDefault();
+            prettyPrintCode();
         }
     });
     

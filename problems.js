@@ -1,4 +1,5 @@
 const problems = [
+    // ==================== EASY PROBLEMS (1-4) ====================
     {
         id: 1,
         title: "Electric",
@@ -33,18 +34,16 @@ Output:
             <p>E = 196 × 8 = 1568 joules</p>
         `,
         starterCode: {
-            python: `# Read input values
-I = int(input())
-R = int(input())
-t = int(input())
-
-# Calculate power and energy
-# P = I²R, E = P·t
-
-# Write your solution below
+            python: `def calculate_energy():
+    I = int(input())
+    R = int(input())
+    t = int(input())
+    
+    # Your code here
+    
+calculate_energy()
 `,
-            javascript: `// Read input from stdin
-const readline = require('readline');
+            javascript: `const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -54,11 +53,11 @@ const lines = [];
 rl.on('line', (line) => {
     lines.push(parseInt(line));
     if (lines.length === 3) {
-        const [I, R, t] = lines;
-        // Calculate power and energy
-        // P = I²R, E = P·t
+        const I = lines[0];
+        const R = lines[1];
+        const t = lines[2];
         
-        // Write your solution below
+        // Your code here
         
         rl.close();
     }
@@ -69,15 +68,14 @@ rl.on('line', (line) => {
 public class Solution {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        
         int I = scanner.nextInt();
         int R = scanner.nextInt();
         int t = scanner.nextInt();
         
-        // Calculate power and energy
-        // P = I²R, E = P·t
+        // Your code here
         
-        // Write your solution below
-        
+        scanner.close();
     }
 }
 `,
@@ -86,12 +84,11 @@ using namespace std;
 
 int main() {
     int I, R, t;
-    cin >> I >> R >> t;
+    cin >> I;
+    cin >> R;
+    cin >> t;
     
-    // Calculate power and energy
-    // P = I²R, E = P·t
-    
-    // Write your solution below
+    // Your code here
     
     return 0;
 }
@@ -109,10 +106,10 @@ int main() {
             <p>Compute the final total paid by the group.</p>
 
             <h2>Input</h2>
-            <p>Three lines: three positive integers (each friend's spend in pounds).</p>
+            <p>Three positive whole numbers, one per line: the amounts spent by person A, B, and C.</p>
 
             <h2>Output</h2>
-            <p>A single positive integer: total paid (spend + individual tips).</p>
+            <p>A single whole number: the total paid (food + tips).</p>
 
             <div class="example-box">
                 <h4>Example</h4>
@@ -122,24 +119,22 @@ int main() {
 9
 
 Output:
-55</pre>
+56</pre>
             </div>
 
             <h2>Explanation</h2>
-            <p>Friend 1: £12 + £1 tip (10% of 12 = 1.2, rounded down) = £13</p>
-            <p>Friend 2: £30 + £3 tip (10% of 30 = 3) = £33</p>
-            <p>Friend 3: £9 + £0 tip (10% of 9 = 0.9, rounded down) = £9</p>
-            <p>Total: 13 + 33 + 9 = 55</p>
+            <p>Tips: floor(12×0.1)=1, floor(30×0.1)=3, floor(9×0.1)=0</p>
+            <p>Total = (12+1) + (30+3) + (9+0) = 13 + 33 + 9 = 56</p>
         `,
         starterCode: {
-            python: `# Read input values
-spend1 = int(input())
-spend2 = int(input())
-spend3 = int(input())
-
-# Calculate total with tips (10% rounded down per person)
-
-# Write your solution below
+            python: `def calculate_total():
+    a = int(input())
+    b = int(input())
+    c = int(input())
+    
+    # Your code here
+    
+calculate_total()
 `,
             javascript: `const readline = require('readline');
 const rl = readline.createInterface({
@@ -147,15 +142,15 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-const lines = [];
+const amounts = [];
 rl.on('line', (line) => {
-    lines.push(parseInt(line));
-    if (lines.length === 3) {
-        const [spend1, spend2, spend3] = lines;
+    amounts.push(parseInt(line));
+    if (amounts.length === 3) {
+        const a = amounts[0];
+        const b = amounts[1];
+        const c = amounts[2];
         
-        // Calculate total with tips (10% rounded down per person)
-        
-        // Write your solution below
+        // Your code here
         
         rl.close();
     }
@@ -166,14 +161,14 @@ rl.on('line', (line) => {
 public class Solution {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int spend1 = scanner.nextInt();
-        int spend2 = scanner.nextInt();
-        int spend3 = scanner.nextInt();
         
-        // Calculate total with tips (10% rounded down per person)
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int c = scanner.nextInt();
         
-        // Write your solution below
+        // Your code here
         
+        scanner.close();
     }
 }
 `,
@@ -181,12 +176,10 @@ public class Solution {
 using namespace std;
 
 int main() {
-    int spend1, spend2, spend3;
-    cin >> spend1 >> spend2 >> spend3;
+    int a, b, c;
+    cin >> a >> b >> c;
     
-    // Calculate total with tips (10% rounded down per person)
-    
-    // Write your solution below
+    // Your code here
     
     return 0;
 }
@@ -199,14 +192,13 @@ int main() {
         difficulty: "easy",
         description: `
             <h2>Problem Description</h2>
-            <p>A positive whole number is <strong>valid</strong> if its last digit is exactly one more or one less than its first digit.</p>
-            <p>Read 12 numbers and output how many are valid.</p>
+            <p>Given a list of numbers, print each number only if it is a positive integer (greater than zero) and has at least two digits.</p>
 
             <h2>Input</h2>
-            <p>Twelve positive whole numbers, one per line.</p>
+            <p>Multiple lines, each containing a single integer.</p>
 
             <h2>Output</h2>
-            <p>A single non-negative whole number: the count of valid numbers.</p>
+            <p>Print only the valid numbers (positive integers ≥ 10), each on its own line.</p>
 
             <div class="example-box">
                 <h4>Example</h4>
@@ -225,35 +217,32 @@ int main() {
 7
 
 Output:
-3</pre>
-            </div>
-
-            <div class="constraints-box">
-                <h4>Constraints</h4>
-                <p>Each number is between 1 and 1,000,000 inclusive.</p>
+1274
+38692
+53
+9358
+790
+55438
+680
+3626
+98643
+1650
+765444</pre>
             </div>
 
             <h2>Explanation</h2>
-            <p>Valid numbers: 38692 (first=3, last=2), 790 (first=7, last=0... wait, |7-0|=7≠1), let's check:</p>
-            <ul>
-                <li>38692: first=3, last=2, |3-2|=1 ✓</li>
-                <li>9358: first=9, last=8, |9-8|=1 ✓</li>
-                <li>680: first=6, last=0, |6-0|=6 ✗</li>
-                <li>98643: first=9, last=3, |9-3|=6 ✗</li>
-            </ul>
+            <p>All numbers except 7 have at least two digits and are positive.</p>
         `,
         starterCode: {
-            python: `# Read 12 numbers and count valid ones
-# A number is valid if |first_digit - last_digit| == 1
+            python: `import sys
 
-count = 0
-for _ in range(12):
-    num = int(input())
-    # Check if valid
-    
-    # Write your solution below
+def validate_numbers():
+    for line in sys.stdin:
+        num = int(line.strip())
+        
+        # Your code here
 
-print(count)
+validate_numbers()
 `,
             javascript: `const readline = require('readline');
 const rl = readline.createInterface({
@@ -261,19 +250,11 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-const numbers = [];
 rl.on('line', (line) => {
-    numbers.push(parseInt(line));
-    if (numbers.length === 12) {
-        let count = 0;
-        
-        // Check each number if valid
-        // A number is valid if |first_digit - last_digit| == 1
-        
-        // Write your solution below
-        
-        rl.close();
-    }
+    const num = parseInt(line);
+    
+    // Your code here
+    
 });
 `,
             java: `import java.util.Scanner;
@@ -281,41 +262,28 @@ rl.on('line', (line) => {
 public class Solution {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int count = 0;
         
-        for (int i = 0; i < 12; i++) {
+        while (scanner.hasNextInt()) {
             int num = scanner.nextInt();
-            // Check if valid
-            // A number is valid if |first_digit - last_digit| == 1
             
-            // Write your solution below
+            // Your code here
             
         }
-        
-        System.out.println(count);
+        scanner.close();
     }
 }
 `,
             cpp: `#include <iostream>
-#include <string>
-#include <cmath>
 using namespace std;
 
 int main() {
-    int count = 0;
+    int num;
     
-    for (int i = 0; i < 12; i++) {
-        int num;
-        cin >> num;
-        
-        // Check if valid
-        // A number is valid if |first_digit - last_digit| == 1
-        
-        // Write your solution below
+    while (cin >> num) {
+        // Your code here
         
     }
     
-    cout << count << endl;
     return 0;
 }
 `
@@ -327,13 +295,13 @@ int main() {
         difficulty: "easy",
         description: `
             <h2>Problem Description</h2>
-            <p>Input three words (one per line) and output them in reverse order, separated by spaces.</p>
+            <p>Given a sequence of words on separate lines, print them in reverse order (last word first, first word last).</p>
 
             <h2>Input</h2>
-            <p>Three lines, each containing one word.</p>
+            <p>Multiple lines, each containing a single word.</p>
 
             <h2>Output</h2>
-            <p>One line consisting of three space-separated words in reverse order.</p>
+            <p>The words in reverse order, one per line.</p>
 
             <div class="example-box">
                 <h4>Example</h4>
@@ -343,23 +311,23 @@ jumped
 up
 
 Output:
-up jumped he</pre>
-            </div>
-
-            <div class="constraints-box">
-                <h4>Constraints</h4>
-                <p>Words are all different, lowercase only, and each has fewer than 20 characters.</p>
+up
+jumped
+he</pre>
             </div>
         `,
         starterCode: {
-            python: `# Read three words
-word1 = input()
-word2 = input()
-word3 = input()
+            python: `import sys
 
-# Output in reverse order, separated by spaces
+def reverse_words():
+    words = []
+    
+    for line in sys.stdin:
+        words.append(line.strip())
+    
+    # Your code here
 
-# Write your solution below
+reverse_words()
 `,
             javascript: `const readline = require('readline');
 const rl = readline.createInterface({
@@ -368,64 +336,72 @@ const rl = readline.createInterface({
 });
 
 const words = [];
+
 rl.on('line', (line) => {
     words.push(line.trim());
-    if (words.length === 3) {
-        // Output in reverse order, separated by spaces
-        
-        // Write your solution below
-        
-        rl.close();
-    }
+});
+
+rl.on('close', () => {
+    // Your code here
+    
 });
 `,
             java: `import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Solution {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String word1 = scanner.nextLine();
-        String word2 = scanner.nextLine();
-        String word3 = scanner.nextLine();
+        ArrayList<String> words = new ArrayList<>();
         
-        // Output in reverse order, separated by spaces
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if (line.isEmpty()) break;
+            words.add(line);
+        }
         
-        // Write your solution below
+        // Your code here
         
+        scanner.close();
     }
 }
 `,
             cpp: `#include <iostream>
+#include <vector>
 #include <string>
 using namespace std;
 
 int main() {
-    string word1, word2, word3;
-    cin >> word1 >> word2 >> word3;
+    vector<string> words;
+    string word;
     
-    // Output in reverse order, separated by spaces
+    while (getline(cin, word)) {
+        if (word.empty()) break;
+        words.push_back(word);
+    }
     
-    // Write your solution below
+    // Your code here
     
     return 0;
 }
 `
         }
     },
+
+    // ==================== MEDIUM PROBLEMS (5-9) ====================
     {
         id: 5,
         title: "Missing Letters",
         difficulty: "medium",
         description: `
             <h2>Problem Description</h2>
-            <p>A <strong>pangram</strong> contains every letter a–z at least once.</p>
-            <p>Given a lowercase sentence (no punctuation), output all missing letters in alphabetical order.</p>
+            <p>Given a sentence (lowercase letters and spaces only), find all letters of the alphabet that do NOT appear in the sentence.</p>
 
             <h2>Input</h2>
-            <p>One line: a lowercase sentence without punctuation.</p>
+            <p>A single line containing a sentence with lowercase letters and spaces.</p>
 
             <h2>Output</h2>
-            <p>One line: the missing lowercase letters in alphabetical order.</p>
+            <p>Print all missing letters in alphabetical order, separated by spaces. If no letters are missing, print "none".</p>
 
             <div class="example-box">
                 <h4>Example</h4>
@@ -433,19 +409,24 @@ int main() {
 a quick brown fox jumped over her lazy dog
 
 Output:
-st</pre>
+s t</pre>
             </div>
 
             <h2>Explanation</h2>
-            <p>The sentence contains all letters except 's' and 't'. These are output in alphabetical order.</p>
+            <p>The sentence contains all letters except 's' and 't'.</p>
         `,
         starterCode: {
-            python: `# Read the sentence
-sentence = input().lower()
+            python: `def find_missing_letters():
+    sentence = input().lower()
+    
+    letters_in_sentence = set()
+    for char in sentence:
+        if char.isalpha():
+            letters_in_sentence.add(char)
+    
+    # Your code here
 
-# Find all missing letters (a-z) and output them in alphabetical order
-
-# Write your solution below
+find_missing_letters()
 `,
             javascript: `const readline = require('readline');
 const rl = readline.createInterface({
@@ -456,39 +437,59 @@ const rl = readline.createInterface({
 rl.on('line', (sentence) => {
     sentence = sentence.toLowerCase();
     
-    // Find all missing letters (a-z) and output them in alphabetical order
+    const lettersInSentence = new Set();
+    for (const char of sentence) {
+        if (/[a-z]/.test(char)) {
+            lettersInSentence.add(char);
+        }
+    }
     
-    // Write your solution below
+    // Your code here
     
     rl.close();
 });
 `,
             java: `import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.ArrayList;
 
 public class Solution {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String sentence = scanner.nextLine().toLowerCase();
         
-        // Find all missing letters (a-z) and output them in alphabetical order
+        Set<Character> lettersInSentence = new HashSet<>();
+        for (char c : sentence.toCharArray()) {
+            if (Character.isLetter(c)) {
+                lettersInSentence.add(c);
+            }
+        }
         
-        // Write your solution below
+        // Your code here
         
+        scanner.close();
     }
 }
 `,
             cpp: `#include <iostream>
 #include <string>
 #include <set>
+#include <vector>
 using namespace std;
 
 int main() {
     string sentence;
     getline(cin, sentence);
     
-    // Find all missing letters (a-z) and output them in alphabetical order
+    set<char> lettersInSentence;
+    for (char c : sentence) {
+        if (isalpha(c)) {
+            lettersInSentence.insert(tolower(c));
+        }
+    }
     
-    // Write your solution below
+    // Your code here
     
     return 0;
 }
@@ -501,51 +502,44 @@ int main() {
         difficulty: "medium",
         description: `
             <h2>Problem Description</h2>
-            <p>A student learns vocabulary with this routine:</p>
-            <ul>
-                <li><strong>Day 1:</strong> learn up to 5 new words.</li>
-                <li><strong>Day 2+:</strong> revise all learned so far, then learn up to 5 new words (fewer on the final day if needed).</li>
-            </ul>
-            <p>A "word interaction" counts every time a word is revised, plus every new word learned that day.</p>
-            <p>Given N (total words to learn), output the total number of word interactions across the whole schedule.</p>
+            <p>A student has N days to revise. Each day they can revise one subject.</p>
+            <p>They want to maximize variety: no subject should be revised on two consecutive days.</p>
+            <p>Given N days and a list of subjects, output a valid revision schedule or "impossible" if it can't be done.</p>
 
             <h2>Input</h2>
-            <p>A single positive whole number N.</p>
+            <p>First line: N (number of days)</p>
+            <p>Second line: space-separated list of subjects (at least 2 subjects)</p>
 
             <h2>Output</h2>
-            <p>A single positive whole number: total interactions.</p>
+            <p>N lines, each with one subject for that day. No two consecutive days should have the same subject.</p>
+            <p>If impossible, print "impossible".</p>
 
             <div class="example-box">
                 <h4>Example</h4>
                 <pre>Input:
 22
+math science english history
 
 Output:
-72</pre>
+math
+science
+math
+science
+...</pre>
             </div>
-
-            <div class="constraints-box">
-                <h4>Constraints</h4>
-                <p>1 ≤ N ≤ 200</p>
-            </div>
-
-            <h2>Explanation</h2>
-            <p>Day 1: Learn 5 words → 5 interactions, total learned = 5</p>
-            <p>Day 2: Revise 5 + Learn 5 → 10 interactions, total learned = 10</p>
-            <p>Day 3: Revise 10 + Learn 5 → 15 interactions, total learned = 15</p>
-            <p>Day 4: Revise 15 + Learn 5 → 20 interactions, total learned = 20</p>
-            <p>Day 5: Revise 20 + Learn 2 → 22 interactions, total learned = 22</p>
-            <p>Total: 5 + 10 + 15 + 20 + 22 = 72</p>
         `,
         starterCode: {
-            python: `# Read total words to learn
-N = int(input())
+            python: `def create_schedule():
+    n = int(input())
+    subjects = input().split()
+    
+    if len(subjects) < 2:
+        print("impossible")
+        return
+    
+    # Your code here
 
-# Calculate total word interactions
-# Day 1: learn up to 5 new words
-# Day 2+: revise all learned + learn up to 5 new words
-
-# Write your solution below
+create_schedule()
 `,
             javascript: `const readline = require('readline');
 const rl = readline.createInterface({
@@ -553,16 +547,23 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
+const lines = [];
 rl.on('line', (line) => {
-    const N = parseInt(line);
-    
-    // Calculate total word interactions
-    // Day 1: learn up to 5 new words
-    // Day 2+: revise all learned + learn up to 5 new words
-    
-    // Write your solution below
-    
-    rl.close();
+    lines.push(line);
+    if (lines.length === 2) {
+        const n = parseInt(lines[0]);
+        const subjects = lines[1].split(' ');
+        
+        if (subjects.length < 2) {
+            console.log("impossible");
+            rl.close();
+            return;
+        }
+        
+        // Your code here
+        
+        rl.close();
+    }
 });
 `,
             java: `import java.util.Scanner;
@@ -570,29 +571,48 @@ rl.on('line', (line) => {
 public class Solution {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
         
-        // Calculate total word interactions
-        // Day 1: learn up to 5 new words
-        // Day 2+: revise all learned + learn up to 5 new words
+        int n = scanner.nextInt();
+        scanner.nextLine();
+        String[] subjects = scanner.nextLine().split(" ");
         
-        // Write your solution below
+        if (subjects.length < 2) {
+            System.out.println("impossible");
+            return;
+        }
         
+        // Your code here
+        
+        scanner.close();
     }
 }
 `,
             cpp: `#include <iostream>
+#include <vector>
+#include <sstream>
 using namespace std;
 
 int main() {
-    int N;
-    cin >> N;
+    int n;
+    cin >> n;
+    cin.ignore();
     
-    // Calculate total word interactions
-    // Day 1: learn up to 5 new words
-    // Day 2+: revise all learned + learn up to 5 new words
+    string line;
+    getline(cin, line);
     
-    // Write your solution below
+    vector<string> subjects;
+    stringstream ss(line);
+    string subject;
+    while (ss >> subject) {
+        subjects.push_back(subject);
+    }
+    
+    if (subjects.size() < 2) {
+        cout << "impossible" << endl;
+        return 0;
+    }
+    
+    // Your code here
     
     return 0;
 }
@@ -605,15 +625,15 @@ int main() {
         difficulty: "medium",
         description: `
             <h2>Problem Description</h2>
-            <p>Start with an initial whole number as term 1 of a sequence.</p>
-            <p>To get the next term: <strong>multiply by 5</strong>, then <strong>remove all trailing zeros</strong> (divide by 10 repeatedly while the last digit is 0).</p>
-            <p>Given the starting term and n, output the n-th term.</p>
+            <p>In a number, when two adjacent digits multiply to zero, the zero digit must be struck out.</p>
+            <p>Repeat this process until no more zeroes can be removed.</p>
+            <p>Given two integers A and B, concatenate them and apply the strike-out rule.</p>
 
             <h2>Input</h2>
-            <p>Two lines: the starting term (a whole number), then n (a positive whole number).</p>
+            <p>Two integers A and B on separate lines.</p>
 
             <h2>Output</h2>
-            <p>A single whole number: the n-th term.</p>
+            <p>The resulting number after striking out all possible zeroes.</p>
 
             <div class="example-box">
                 <h4>Example</h4>
@@ -622,31 +642,22 @@ int main() {
 6
 
 Output:
-125</pre>
-            </div>
-
-            <div class="constraints-box">
-                <h4>Constraints</h4>
-                <p>Starting term is between −1000 and 1000 inclusive. 1 ≤ n ≤ 10.</p>
+46</pre>
             </div>
 
             <h2>Explanation</h2>
-            <p>Term 1: 40</p>
-            <p>Term 2: 40 × 5 = 200 → remove zeros → 2</p>
-            <p>Term 3: 2 × 5 = 10 → remove zeros → 1</p>
-            <p>Term 4: 1 × 5 = 5</p>
-            <p>Term 5: 5 × 5 = 25</p>
-            <p>Term 6: 25 × 5 = 125</p>
+            <p>Concatenate: "406". The 0 is adjacent to 4 and 6 (4×0=0, 0×6=0), so strike it out → "46".</p>
         `,
         starterCode: {
-            python: `# Read starting term and n
-start = int(input())
-n = int(input())
+            python: `def strike_out_zeroes():
+    a = input().strip()
+    b = input().strip()
+    
+    combined = a + b
+    
+    # Your code here
 
-# Generate sequence: multiply by 5, remove trailing zeros
-# Output the n-th term
-
-# Write your solution below
+strike_out_zeroes()
 `,
             javascript: `const readline = require('readline');
 const rl = readline.createInterface({
@@ -656,14 +667,11 @@ const rl = readline.createInterface({
 
 const lines = [];
 rl.on('line', (line) => {
-    lines.push(parseInt(line));
+    lines.push(line.trim());
     if (lines.length === 2) {
-        const [start, n] = lines;
+        let combined = lines[0] + lines[1];
         
-        // Generate sequence: multiply by 5, remove trailing zeros
-        // Output the n-th term
-        
-        // Write your solution below
+        // Your code here
         
         rl.close();
     }
@@ -674,28 +682,29 @@ rl.on('line', (line) => {
 public class Solution {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int start = scanner.nextInt();
-        int n = scanner.nextInt();
         
-        // Generate sequence: multiply by 5, remove trailing zeros
-        // Output the n-th term
+        String a = scanner.nextLine().trim();
+        String b = scanner.nextLine().trim();
         
-        // Write your solution below
+        String combined = a + b;
         
+        // Your code here
+        
+        scanner.close();
     }
 }
 `,
             cpp: `#include <iostream>
+#include <string>
 using namespace std;
 
 int main() {
-    int start, n;
-    cin >> start >> n;
+    string a, b;
+    cin >> a >> b;
     
-    // Generate sequence: multiply by 5, remove trailing zeros
-    // Output the n-th term
+    string combined = a + b;
     
-    // Write your solution below
+    // Your code here
     
     return 0;
 }
@@ -704,81 +713,306 @@ int main() {
     },
     {
         id: 8,
+        title: "Two Sum",
+        difficulty: "medium",
+        description: `
+            <h2>Problem Description</h2>
+            <p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return the indices of the two numbers such that they add up to <code>target</code>.</p>
+            <p>You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the same element twice.</p>
+            <p>You can return the answer in any order.</p>
+
+            <h2>Input</h2>
+            <p>An array of integers and a target sum.</p>
+
+            <h2>Output</h2>
+            <p>Two indices (0-indexed) of the numbers that add up to the target.</p>
+
+            <div class="example-box">
+                <h4>Example 1</h4>
+                <pre>Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2</h4>
+                <pre>Input: nums = [3,2,4], target = 6
+Output: [1,2]</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3</h4>
+                <pre>Input: nums = [3,3], target = 6
+Output: [0,1]</pre>
+            </div>
+
+            <h2>Constraints</h2>
+            <ul>
+                <li>2 ≤ nums.length ≤ 10<sup>4</sup></li>
+                <li>-10<sup>9</sup> ≤ nums[i] ≤ 10<sup>9</sup></li>
+                <li>Only one valid answer exists.</li>
+            </ul>
+        `,
+        starterCode: {
+            python: `def two_sum(nums, target):
+    # Your code here
+    pass
+
+print(two_sum([2, 7, 11, 15], 9))
+print(two_sum([3, 2, 4], 6))
+print(two_sum([3, 3], 6))
+`,
+            javascript: `function twoSum(nums, target) {
+    // Your code here
+    
+}
+
+console.log(twoSum([2, 7, 11, 15], 9));
+console.log(twoSum([3, 2, 4], 6));
+console.log(twoSum([3, 3], 6));
+`,
+            java: `import java.util.HashMap;
+import java.util.Arrays;
+
+public class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        // Your code here
+        
+        return new int[]{};
+    }
+    
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        System.out.println(Arrays.toString(
+            sol.twoSum(new int[]{2, 7, 11, 15}, 9)
+        ));
+        
+        System.out.println(Arrays.toString(
+            sol.twoSum(new int[]{3, 2, 4}, 6)
+        ));
+    }
+}
+`,
+            cpp: `#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        // Your code here
+        
+        return {};
+    }
+};
+
+int main() {
+    Solution sol;
+    
+    vector<int> nums = {2, 7, 11, 15};
+    vector<int> result = sol.twoSum(nums, 9);
+    
+    cout << "[" << result[0] << ", " << result[1] << "]" << endl;
+    
+    return 0;
+}
+`
+        }
+    },
+    {
+        id: 9,
+        title: "Valid Parentheses",
+        difficulty: "medium",
+        description: `
+            <h2>Problem Description</h2>
+            <p>Given a string <code>s</code> containing just the characters <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code> and <code>']'</code>, determine if the input string is valid.</p>
+            <p>An input string is valid if:</p>
+            <ol>
+                <li>Open brackets must be closed by the same type of brackets.</li>
+                <li>Open brackets must be closed in the correct order.</li>
+                <li>Every close bracket has a corresponding open bracket of the same type.</li>
+            </ol>
+
+            <h2>Input</h2>
+            <p>A string containing only parentheses characters.</p>
+
+            <h2>Output</h2>
+            <p>Return <code>true</code> if the string is valid, <code>false</code> otherwise.</p>
+
+            <div class="example-box">
+                <h4>Example 1</h4>
+                <pre>Input: s = "()"
+Output: true</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2</h4>
+                <pre>Input: s = "()[]{}"
+Output: true</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3</h4>
+                <pre>Input: s = "(]"
+Output: false</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 4</h4>
+                <pre>Input: s = "([)]"
+Output: false</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 5</h4>
+                <pre>Input: s = "{[]}"
+Output: true</pre>
+            </div>
+
+            <h2>Constraints</h2>
+            <ul>
+                <li>1 ≤ s.length ≤ 10<sup>4</sup></li>
+                <li>s consists of parentheses only '()[]{}'</li>
+            </ul>
+        `,
+        starterCode: {
+            python: `def is_valid(s):
+    # Your code here
+    pass
+
+print(is_valid("()"))
+print(is_valid("()[]{}"))
+print(is_valid("(]"))
+print(is_valid("([)]"))
+print(is_valid("{[]}"))
+`,
+            javascript: `function isValid(s) {
+    // Your code here
+    
+}
+
+console.log(isValid("()"));
+console.log(isValid("()[]{}"));
+console.log(isValid("(]"));
+console.log(isValid("([)]"));
+console.log(isValid("{[]}"));
+`,
+            java: `import java.util.Stack;
+
+public class Solution {
+    public boolean isValid(String s) {
+        // Your code here
+        
+        return false;
+    }
+    
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        System.out.println(sol.isValid("()"));
+        System.out.println(sol.isValid("()[]{}"));
+        System.out.println(sol.isValid("(]"));
+        System.out.println(sol.isValid("([)]"));
+        System.out.println(sol.isValid("{[]}"));
+    }
+}
+`,
+            cpp: `#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+
+class Solution {
+public:
+    bool isValid(string s) {
+        // Your code here
+        
+        return false;
+    }
+};
+
+int main() {
+    Solution sol;
+    
+    cout << boolalpha;
+    cout << sol.isValid("()") << endl;
+    cout << sol.isValid("()[]{}") << endl;
+    cout << sol.isValid("(]") << endl;
+    cout << sol.isValid("([)]") << endl;
+    cout << sol.isValid("{[]}") << endl;
+    
+    return 0;
+}
+`
+        }
+    },
+
+    // ==================== HARD PROBLEMS (10-20) ====================
+    {
+        id: 10,
         title: "Best Time to Buy and Sell Stock",
         difficulty: "hard",
         description: `
             <h2>Problem Description</h2>
-            <p>You are given an array <code>prices</code> where <code>prices[i]</code> is the stock price on day i.</p>
-            <p>Choose <strong>one day to buy</strong> and <strong>a later day to sell</strong> to maximize profit.</p>
-            <p>Output the maximum profit; if no profit is possible, output 0.</p>
+            <p>You are given an array <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the ith day.</p>
+            <p>You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.</p>
+            <p>Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.</p>
+
+            <h2>Input</h2>
+            <p>An array of integers representing stock prices.</p>
+
+            <h2>Output</h2>
+            <p>The maximum profit possible.</p>
 
             <div class="example-box">
                 <h4>Example 1</h4>
                 <pre>Input: prices = [7,1,5,3,6,4]
-Output: 5</pre>
-                <p>Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.</p>
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.</pre>
             </div>
 
             <div class="example-box">
                 <h4>Example 2</h4>
                 <pre>Input: prices = [7,6,4,3,1]
-Output: 0</pre>
-                <p>No profitable transaction is possible.</p>
-            </div>
-
-            <div class="constraints-box">
-                <h4>Constraints</h4>
-                <p>1 ≤ prices.length ≤ 100000</p>
-                <p>0 ≤ prices[i] ≤ 10000</p>
+Output: 0
+Explanation: No profit possible, prices only decrease.</pre>
             </div>
         `,
         starterCode: {
-            python: `def maxProfit(prices):
-    """
-    Find the maximum profit from buying and selling stock once.
-    
-    Args:
-        prices: List of stock prices where prices[i] is the price on day i
-    
-    Returns:
-        Maximum profit possible, or 0 if no profit is possible
-    """
-    # Write your solution below
+            python: `def max_profit(prices):
+    # Your code here
     pass
 
-# Example usage:
-# prices = [7, 1, 5, 3, 6, 4]
-# print(maxProfit(prices))  # Expected: 5
+print(max_profit([7, 1, 5, 3, 6, 4]))
+print(max_profit([7, 6, 4, 3, 1]))
 `,
-            javascript: `/**
- * Find the maximum profit from buying and selling stock once.
- * @param {number[]} prices - Array of stock prices
- * @return {number} Maximum profit possible, or 0 if no profit is possible
- */
-function maxProfit(prices) {
-    // Write your solution below
+            javascript: `function maxProfit(prices) {
+    // Your code here
     
 }
 
-// Example usage:
-// console.log(maxProfit([7, 1, 5, 3, 6, 4]));  // Expected: 5
+console.log(maxProfit([7, 1, 5, 3, 6, 4]));
+console.log(maxProfit([7, 6, 4, 3, 1]));
 `,
             java: `public class Solution {
-    /**
-     * Find the maximum profit from buying and selling stock once.
-     * @param prices Array of stock prices
-     * @return Maximum profit possible, or 0 if no profit is possible
-     */
     public int maxProfit(int[] prices) {
-        // Write your solution below
+        // Your code here
         
         return 0;
     }
     
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[] prices = {7, 1, 5, 3, 6, 4};
-        System.out.println(sol.maxProfit(prices));  // Expected: 5
+        
+        System.out.println(sol.maxProfit(
+            new int[]{7, 1, 5, 3, 6, 4}
+        ));
+        
+        System.out.println(sol.maxProfit(
+            new int[]{7, 6, 4, 3, 1}
+        ));
     }
 }
 `,
@@ -789,13 +1023,8 @@ using namespace std;
 
 class Solution {
 public:
-    /**
-     * Find the maximum profit from buying and selling stock once.
-     * @param prices Vector of stock prices
-     * @return Maximum profit possible, or 0 if no profit is possible
-     */
     int maxProfit(vector<int>& prices) {
-        // Write your solution below
+        // Your code here
         
         return 0;
     }
@@ -803,15 +1032,20 @@ public:
 
 int main() {
     Solution sol;
-    vector<int> prices = {7, 1, 5, 3, 6, 4};
-    cout << sol.maxProfit(prices) << endl;  // Expected: 5
+    
+    vector<int> prices1 = {7, 1, 5, 3, 6, 4};
+    cout << sol.maxProfit(prices1) << endl;
+    
+    vector<int> prices2 = {7, 6, 4, 3, 1};
+    cout << sol.maxProfit(prices2) << endl;
+    
     return 0;
 }
 `
         }
     },
     {
-        id: 9,
+        id: 11,
         title: "Feeder Simulation",
         difficulty: "hard",
         description: `
@@ -842,67 +1076,64 @@ int main() {
 
 class Feeder:
     def __init__(self, initial_food=0):
-        self.current_food = initial_food  # grams, always >= 0
+        self.current_food = initial_food
     
     def simulate_one_day(self, num_birds):
-        """
-        Simulate one day with num_birds > 0.
-        - 95% probability: birds visit, each eats random 10-50 grams
-        - 5% probability: bear visits and empties feeder
-        """
-        # Write your solution below
+        # Your code here
         pass
+    
+    def get_food(self):
+        return self.current_food
 
-# Example usage:
-# feeder = Feeder(1000)
-# feeder.simulate_one_day(3)
-# print(feeder.current_food)
+feeder = Feeder(1000)
+print(f"Initial food: {feeder.get_food()}")
+feeder.simulate_one_day(5)
+print(f"After day 1: {feeder.get_food()}")
 `,
             javascript: `class Feeder {
     constructor(initialFood = 0) {
-        this.currentFood = initialFood;  // grams, always >= 0
+        this.currentFood = initialFood;
     }
     
-    /**
-     * Simulate one day with numBirds > 0.
-     * - 95% probability: birds visit, each eats random 10-50 grams
-     * - 5% probability: bear visits and empties feeder
-     */
     simulateOneDay(numBirds) {
-        // Write your solution below
+        // Your code here
         
+    }
+    
+    getFood() {
+        return this.currentFood;
     }
 }
 
-// Example usage:
-// const feeder = new Feeder(1000);
-// feeder.simulateOneDay(3);
-// console.log(feeder.currentFood);
+const feeder = new Feeder(1000);
+console.log(\`Initial food: \${feeder.getFood()}\`);
+feeder.simulateOneDay(5);
+console.log(\`After day 1: \${feeder.getFood()}\`);
 `,
             java: `import java.util.Random;
 
 public class Feeder {
-    private int currentFood;  // grams, always >= 0
+    private int currentFood;
     private Random random = new Random();
     
     public Feeder(int initialFood) {
         this.currentFood = initialFood;
     }
     
-    /**
-     * Simulate one day with numBirds > 0.
-     * - 95% probability: birds visit, each eats random 10-50 grams
-     * - 5% probability: bear visits and empties feeder
-     */
     public void simulateOneDay(int numBirds) {
-        // Write your solution below
+        // Your code here
         
+    }
+    
+    public int getFood() {
+        return currentFood;
     }
     
     public static void main(String[] args) {
         Feeder feeder = new Feeder(1000);
-        feeder.simulateOneDay(3);
-        System.out.println(feeder.currentFood);
+        System.out.println("Initial food: " + feeder.getFood());
+        feeder.simulateOneDay(5);
+        System.out.println("After day 1: " + feeder.getFood());
     }
 }
 `,
@@ -913,37 +1144,36 @@ using namespace std;
 
 class Feeder {
 private:
-    int currentFood;  // grams, always >= 0
+    int currentFood;
     
 public:
     Feeder(int initialFood = 0) : currentFood(initialFood) {
         srand(time(0));
     }
     
-    /**
-     * Simulate one day with numBirds > 0.
-     * - 95% probability: birds visit, each eats random 10-50 grams
-     * - 5% probability: bear visits and empties feeder
-     */
     void simulateOneDay(int numBirds) {
-        // Write your solution below
+        // Your code here
         
     }
     
-    int getCurrentFood() { return currentFood; }
+    int getFood() {
+        return currentFood;
+    }
 };
 
 int main() {
     Feeder feeder(1000);
-    feeder.simulateOneDay(3);
-    cout << feeder.getCurrentFood() << endl;
+    cout << "Initial food: " << feeder.getFood() << endl;
+    feeder.simulateOneDay(5);
+    cout << "After day 1: " << feeder.getFood() << endl;
+    
     return 0;
 }
 `
         }
     },
     {
-        id: 10,
+        id: 12,
         title: "Honeycomb Route",
         difficulty: "hard",
         description: `
@@ -975,22 +1205,16 @@ Output:
 4</pre>
                 <p><strong>Explanation:</strong> One shortest route is 13 → 12 → 8 → 7.</p>
             </div>
-
-            <div class="constraints-box">
-                <h4>Constraints</h4>
-                <p>2 ≤ n ≤ 1,000,000 and 1 ≤ s, f ≤ n²</p>
-            </div>
         `,
         starterCode: {
-            python: `# Read input
-n = int(input())  # size of honeycomb
-s = int(input())  # start cell
-f = int(input())  # finish cell
+            python: `def find_shortest_path():
+    n = int(input())
+    s = int(input())
+    f = int(input())
+    
+    # Your code here
 
-# Find minimum number of cells to traverse from s to f
-# Honeycomb has n² cells in diamond shape
-
-# Write your solution below
+find_shortest_path()
 `,
             javascript: `const readline = require('readline');
 const rl = readline.createInterface({
@@ -1002,45 +1226,42 @@ const lines = [];
 rl.on('line', (line) => {
     lines.push(parseInt(line));
     if (lines.length === 3) {
-        const [n, s, f] = lines;
+        const n = lines[0];
+        const s = lines[1];
+        const f = lines[2];
         
-        // Find minimum number of cells to traverse from s to f
-        // Honeycomb has n² cells in diamond shape
-        
-        // Write your solution below
+        // Your code here
         
         rl.close();
     }
 });
 `,
-            java: `import java.util.Scanner;
+            java: `import java.util.*;
 
 public class Solution {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();  // size of honeycomb
-        int s = scanner.nextInt();  // start cell
-        int f = scanner.nextInt();  // finish cell
         
-        // Find minimum number of cells to traverse from s to f
-        // Honeycomb has n² cells in diamond shape
+        int n = scanner.nextInt();
+        int s = scanner.nextInt();
+        int f = scanner.nextInt();
         
-        // Write your solution below
+        // Your code here
         
+        scanner.close();
     }
 }
 `,
             cpp: `#include <iostream>
+#include <queue>
+#include <vector>
 using namespace std;
 
 int main() {
-    long long n, s, f;
+    int n, s, f;
     cin >> n >> s >> f;
     
-    // Find minimum number of cells to traverse from s to f
-    // Honeycomb has n² cells in diamond shape
-    
-    // Write your solution below
+    // Your code here
     
     return 0;
 }
@@ -1048,22 +1269,20 @@ int main() {
         }
     },
     {
-        id: 11,
+        id: 13,
         title: "Latin Square Completion",
         difficulty: "hard",
         description: `
             <h2>Problem Description</h2>
-            <p>You are given a square grid of digits that is intended to be a <strong>Latin square</strong> of size n.</p>
-            <p>A size-n Latin square uses only digits 1 through n, and each digit appears exactly once in every row and in every column.</p>
-            <p>Input n, followed by n−1 rows of the grid (each row is given as an n-digit number).</p>
-            <p>If the given n−1 rows can be the first n−1 rows of a valid Latin square, output the missing final row that completes the square.</p>
-            <p>Otherwise output the word <code>invalid</code>.</p>
+            <p>A Latin Square is an n × n grid filled with n different symbols, where each symbol appears exactly once in each row and exactly once in each column.</p>
+            <p>Given a partially filled n × n grid, complete it to form a valid Latin Square, or determine that it's impossible.</p>
 
-            <h2>Input</h2>
-            <p>A single digit n (2 to 9 inclusive), followed by n−1 lines, each containing an n-digit number.</p>
+            <h2>Input Format</h2>
+            <p>First line: n (size of the grid)</p>
+            <p>Next n lines: each contains n integers. 0 indicates an empty cell, other values (1 to n) are pre-filled.</p>
 
-            <h2>Output</h2>
-            <p>Either an n-digit number (the final row) or the word <code>invalid</code>.</p>
+            <h2>Output Format</h2>
+            <p>Print the completed Latin Square, or "impossible" if no valid completion exists.</p>
 
             <div class="example-box">
                 <h4>Example</h4>
@@ -1072,23 +1291,39 @@ int main() {
 1432
 2314
 3241
+0000
 
 Output:
+1432
+2314
+3241
 4123</pre>
             </div>
         `,
         starterCode: {
-            python: `# Read n and n-1 rows
-n = int(input())
-rows = []
-for _ in range(n - 1):
-    rows.append(input())
+            python: `def solve_latin_square():
+    n = int(input())
+    grid = []
+    
+    for _ in range(n):
+        row = [int(c) for c in input().strip()]
+        grid.append(row)
+    
+    def is_valid(row, col, num):
+        # Your code here
+        pass
+    
+    def solve(row, col):
+        # Your code here
+        pass
+    
+    if solve(0, 0):
+        for row in grid:
+            print(''.join(map(str, row)))
+    else:
+        print("impossible")
 
-# Check if valid Latin square is possible
-# If yes, output the missing final row
-# If no, output "invalid"
-
-# Write your solution below
+solve_latin_square()
 `,
             javascript: `const readline = require('readline');
 const rl = readline.createInterface({
@@ -1096,69 +1331,120 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-let n = 0;
-const rows = [];
-let lineCount = 0;
-
+const lines = [];
 rl.on('line', (line) => {
-    if (lineCount === 0) {
-        n = parseInt(line);
-    } else {
-        rows.push(line.trim());
-    }
-    lineCount++;
+    lines.push(line.trim());
+});
+
+rl.on('close', () => {
+    const n = parseInt(lines[0]);
+    const grid = [];
     
-    if (lineCount === n) {
-        // Check if valid Latin square is possible
-        // If yes, output the missing final row
-        // If no, output "invalid"
-        
-        // Write your solution below
-        
-        rl.close();
+    for (let i = 1; i <= n; i++) {
+        grid.push(lines[i].split('').map(Number));
+    }
+    
+    function isValid(row, col, num) {
+        // Your code here
+    }
+    
+    function solve(row, col) {
+        // Your code here
+    }
+    
+    if (solve(0, 0)) {
+        for (const row of grid) {
+            console.log(row.join(''));
+        }
+    } else {
+        console.log("impossible");
     }
 });
 `,
             java: `import java.util.Scanner;
 
 public class Solution {
+    static int n;
+    static int[][] grid;
+    
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int n = Integer.parseInt(scanner.nextLine());
-        String[] rows = new String[n - 1];
         
-        for (int i = 0; i < n - 1; i++) {
-            rows[i] = scanner.nextLine();
+        n = scanner.nextInt();
+        grid = new int[n][n];
+        
+        for (int i = 0; i < n; i++) {
+            String row = scanner.next();
+            for (int j = 0; j < n; j++) {
+                grid[i][j] = row.charAt(j) - '0';
+            }
         }
         
-        // Check if valid Latin square is possible
-        // If yes, output the missing final row
-        // If no, output "invalid"
+        if (solve(0, 0)) {
+            for (int[] row : grid) {
+                for (int num : row) {
+                    System.out.print(num);
+                }
+                System.out.println();
+            }
+        } else {
+            System.out.println("impossible");
+        }
         
-        // Write your solution below
-        
+        scanner.close();
+    }
+    
+    static boolean isValid(int row, int col, int num) {
+        // Your code here
+        return false;
+    }
+    
+    static boolean solve(int row, int col) {
+        // Your code here
+        return false;
     }
 }
 `,
             cpp: `#include <iostream>
-#include <string>
 #include <vector>
+#include <string>
 using namespace std;
 
+int n;
+vector<vector<int>> grid;
+
+bool isValid(int row, int col, int num) {
+    // Your code here
+    return false;
+}
+
+bool solve(int row, int col) {
+    // Your code here
+    return false;
+}
+
 int main() {
-    int n;
     cin >> n;
+    grid.resize(n, vector<int>(n));
     
-    vector<string> rows(n - 1);
-    for (int i = 0; i < n - 1; i++) {
-        cin >> rows[i];
+    for (int i = 0; i < n; i++) {
+        string row;
+        cin >> row;
+        for (int j = 0; j < n; j++) {
+            grid[i][j] = row[j] - '0';
+        }
     }
     
-    // Check if valid Latin square is possible
-    // If yes, output the missing final row
-    // If no, output "invalid"
-    
-    // Write your solution below
+    if (solve(0, 0)) {
+        for (const auto& row : grid) {
+            for (int num : row) {
+                cout << num;
+            }
+            cout << endl;
+        }
+    } else {
+        cout << "impossible" << endl;
+    }
     
     return 0;
 }
@@ -1166,228 +1452,195 @@ int main() {
         }
     },
     {
-        id: 12,
+        id: 14,
         title: "Recursive Palindrome Cleanup",
         difficulty: "hard",
         description: `
             <h2>Problem Description</h2>
-            <p>Write a <strong>recursive function</strong> that removes matching outer letters from a string.</p>
-            <p>Given a lowercase string s:</p>
-            <ul>
-                <li>If s is empty or length 1, it is already "cleaned".</li>
-                <li>If the first and last characters are the same, remove both and recursively clean the remaining middle.</li>
-                <li>Otherwise, remove neither and stop.</li>
-            </ul>
-            <p>Output the cleaned string.</p>
+            <p>Given a string, repeatedly remove the longest palindromic substring (length ≥ 2) until no more can be removed.</p>
+            <p>If there are multiple longest palindromes of the same length, remove the leftmost one.</p>
+            <p>Output the final string after all removals.</p>
 
             <h2>Input</h2>
-            <p>One line: a lowercase string s (1 to 200 characters).</p>
+            <p>A single string consisting of lowercase letters.</p>
 
             <h2>Output</h2>
-            <p>One line: the cleaned string.</p>
+            <p>The final string after all palindrome removals. If empty, print "empty".</p>
 
             <div class="example-box">
-                <h4>Example 1</h4>
-                <pre>Input:
-abccba
-
-Output:
-(empty line)</pre>
-            </div>
-
-            <div class="example-box">
-                <h4>Example 2</h4>
-                <pre>Input:
-abca
-
-Output:
-abca</pre>
-            </div>
-
-            <div class="example-box">
-                <h4>Example 3</h4>
+                <h4>Example</h4>
                 <pre>Input:
 aabxbaa
 
 Output:
-x</pre>
+empty</pre>
             </div>
 
-            <div class="note-box">
-                <h4>Note</h4>
-                <p>Your solution <strong>must use recursion</strong> (no loops required, but allowed elsewhere for input/output).</p>
-            </div>
+            <h2>Explanation</h2>
+            <p>Step 1: Remove "aabxbaa" (the whole string is a palindrome) → empty</p>
         `,
         starterCode: {
-            python: `def clean_palindrome(s):
-    """
-    Recursively remove matching outer letters from string s.
+            python: `def cleanup_palindromes():
+    s = input().strip()
     
-    Args:
-        s: A lowercase string
+    def is_palindrome(string):
+        return string == string[::-1]
     
-    Returns:
-        The cleaned string after removing all matching outer pairs
-    """
-    # Write your recursive solution below
-    pass
+    def find_longest_palindrome(string):
+        # Your code here
+        pass
+    
+    # Your code here
 
-# Read input and output result
-s = input()
-print(clean_palindrome(s))
+cleanup_palindromes()
 `,
-            javascript: `/**
- * Recursively remove matching outer letters from string s.
- * @param {string} s - A lowercase string
- * @return {string} The cleaned string after removing all matching outer pairs
- */
-function cleanPalindrome(s) {
-    // Write your recursive solution below
-    
-}
-
-const readline = require('readline');
+            javascript: `const readline = require('readline');
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
 rl.on('line', (s) => {
-    console.log(cleanPalindrome(s.trim()));
+    s = s.trim();
+    
+    function isPalindrome(str) {
+        return str === str.split('').reverse().join('');
+    }
+    
+    function findLongestPalindrome(str) {
+        // Your code here
+    }
+    
+    // Your code here
+    
     rl.close();
 });
 `,
             java: `import java.util.Scanner;
 
 public class Solution {
-    /**
-     * Recursively remove matching outer letters from string s.
-     * @param s A lowercase string
-     * @return The cleaned string after removing all matching outer pairs
-     */
-    public static String cleanPalindrome(String s) {
-        // Write your recursive solution below
-        
-        return s;
-    }
-    
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String s = scanner.nextLine();
-        System.out.println(cleanPalindrome(s));
+        String s = scanner.nextLine().trim();
+        
+        // Your code here
+        
+        scanner.close();
+    }
+    
+    static boolean isPalindrome(String str) {
+        return str.equals(
+            new StringBuilder(str).reverse().toString()
+        );
+    }
+    
+    static int[] findLongestPalindrome(String str) {
+        // Your code here
+        return null;
     }
 }
 `,
             cpp: `#include <iostream>
 #include <string>
+#include <algorithm>
 using namespace std;
 
-/**
- * Recursively remove matching outer letters from string s.
- * @param s A lowercase string
- * @return The cleaned string after removing all matching outer pairs
- */
-string cleanPalindrome(string s) {
-    // Write your recursive solution below
-    
-    return s;
+bool isPalindrome(const string& s) {
+    string rev = s;
+    reverse(rev.begin(), rev.end());
+    return s == rev;
+}
+
+pair<int, int> findLongestPalindrome(const string& s) {
+    // Your code here
+    return {-1, 0};
 }
 
 int main() {
     string s;
     getline(cin, s);
-    cout << cleanPalindrome(s) << endl;
+    
+    // Your code here
+    
     return 0;
 }
 `
         }
     },
     {
-        id: 13,
+        id: 15,
         title: "Remove Element",
         difficulty: "hard",
         description: `
             <h2>Problem Description</h2>
-            <p>Given an integer array <code>nums</code> and an integer <code>val</code>, remove all occurrences of <code>val</code> in <code>nums</code> <strong>in-place</strong>.</p>
-            <p>You may change the order of the elements.</p>
-            <p>Return <code>k</code>, the number of elements in <code>nums</code> that are not equal to <code>val</code>, and ensure the first <code>k</code> elements contain the kept values.</p>
+            <p>Given an integer array <code>nums</code> and an integer <code>val</code>, remove all occurrences of <code>val</code> in <code>nums</code> in-place.</p>
+            <p>The order of the elements may be changed. Then return the number of elements in <code>nums</code> which are not equal to <code>val</code>.</p>
+
+            <h2>Input</h2>
+            <p>An array of integers and a target value to remove.</p>
 
             <h2>Output</h2>
-            <p>Return k (an integer).</p>
+            <p>The count of elements not equal to val, and the modified array.</p>
 
             <div class="example-box">
-                <h4>Example 1</h4>
+                <h4>Example</h4>
                 <pre>Input: nums = [3,2,2,3], val = 3
-Output: 2, nums = [2,2,_,_]</pre>
-                <p>Your function should return k = 2, with the first two elements of nums being 2.</p>
+Output: 2, nums = [2,2,_,_]
+Explanation: Your function should return k = 2, with the first two elements of nums being 2.</pre>
             </div>
 
             <div class="example-box">
                 <h4>Example 2</h4>
                 <pre>Input: nums = [0,1,2,2,3,0,4,2], val = 2
-Output: 5, nums = [0,1,4,0,3,_,_,_]</pre>
-                <p>Your function should return k = 5, with the first five elements containing 0, 0, 1, 3, and 4 (order doesn't matter).</p>
-            </div>
-
-            <div class="note-box">
-                <h4>Note</h4>
-                <p>Some judges sort nums[0..k) before comparing to the expected kept elements.</p>
+Output: 5, nums = [0,1,4,0,3,_,_,_]
+Explanation: Your function should return k = 5.</pre>
             </div>
         `,
         starterCode: {
-            python: `def removeElement(nums, val):
-    """
-    Remove all occurrences of val in nums in-place.
-    
-    Args:
-        nums: List of integers
-        val: Value to remove
-    
-    Returns:
-        k: Number of elements not equal to val
-    """
-    # Write your solution below
+            python: `def remove_element(nums, val):
+    # Your code here
     pass
 
-# Example usage:
-# nums = [3, 2, 2, 3]
-# k = removeElement(nums, 3)
-# print(k, nums[:k])  # Expected: 2, [2, 2]
+nums1 = [3, 2, 2, 3]
+k1 = remove_element(nums1, 3)
+print(f"k = {k1}, nums = {nums1[:k1]}")
+
+nums2 = [0, 1, 2, 2, 3, 0, 4, 2]
+k2 = remove_element(nums2, 2)
+print(f"k = {k2}, nums = {nums2[:k2]}")
 `,
-            javascript: `/**
- * Remove all occurrences of val in nums in-place.
- * @param {number[]} nums - Array of integers
- * @param {number} val - Value to remove
- * @return {number} k - Number of elements not equal to val
- */
-function removeElement(nums, val) {
-    // Write your solution below
+            javascript: `function removeElement(nums, val) {
+    // Your code here
     
 }
 
-// Example usage:
-// const nums = [3, 2, 2, 3];
-// const k = removeElement(nums, 3);
-// console.log(k, nums.slice(0, k));  // Expected: 2, [2, 2]
+let nums1 = [3, 2, 2, 3];
+let k1 = removeElement(nums1, 3);
+console.log(\`k = \${k1}, nums = [\${nums1.slice(0, k1)}]\`);
+
+let nums2 = [0, 1, 2, 2, 3, 0, 4, 2];
+let k2 = removeElement(nums2, 2);
+console.log(\`k = \${k2}, nums = [\${nums2.slice(0, k2)}]\`);
 `,
-            java: `public class Solution {
-    /**
-     * Remove all occurrences of val in nums in-place.
-     * @param nums Array of integers
-     * @param val Value to remove
-     * @return k Number of elements not equal to val
-     */
+            java: `import java.util.Arrays;
+
+public class Solution {
     public int removeElement(int[] nums, int val) {
-        // Write your solution below
+        // Your code here
         
         return 0;
     }
     
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[] nums = {3, 2, 2, 3};
-        int k = sol.removeElement(nums, 3);
-        System.out.println("k = " + k);  // Expected: 2
+        
+        int[] nums1 = {3, 2, 2, 3};
+        int k1 = sol.removeElement(nums1, 3);
+        System.out.println("k = " + k1);
+        
+        int[] nums2 = {0, 1, 2, 2, 3, 0, 4, 2};
+        int k2 = sol.removeElement(nums2, 2);
+        System.out.println("k = " + k2);
     }
 }
 `,
@@ -1397,14 +1650,8 @@ using namespace std;
 
 class Solution {
 public:
-    /**
-     * Remove all occurrences of val in nums in-place.
-     * @param nums Vector of integers
-     * @param val Value to remove
-     * @return k Number of elements not equal to val
-     */
     int removeElement(vector<int>& nums, int val) {
-        // Write your solution below
+        // Your code here
         
         return 0;
     }
@@ -1412,31 +1659,35 @@ public:
 
 int main() {
     Solution sol;
-    vector<int> nums = {3, 2, 2, 3};
-    int k = sol.removeElement(nums, 3);
-    cout << "k = " << k << endl;  // Expected: 2
+    
+    vector<int> nums1 = {3, 2, 2, 3};
+    int k1 = sol.removeElement(nums1, 3);
+    cout << "k = " << k1 << endl;
+    
+    vector<int> nums2 = {0, 1, 2, 2, 3, 0, 4, 2};
+    int k2 = sol.removeElement(nums2, 2);
+    cout << "k = " << k2 << endl;
+    
     return 0;
 }
 `
         }
     },
     {
-        id: 14,
+        id: 16,
         title: "Signal Tower Coverage",
         difficulty: "hard",
         description: `
             <h2>Problem Description</h2>
-            <p>You are given a line of towns, each with an integer population. You want to place exactly <strong>K signal towers</strong>.</p>
-            <p>A tower placed at town i covers town i and its immediate neighbors (i−1 and i+1, if they exist).</p>
-            <p>Your goal is to <strong>maximize the total population covered</strong> (count each town at most once even if covered by multiple towers).</p>
-            <p>Output the maximum total covered population.</p>
+            <p>You have n signal towers positioned in a row. Each tower has a signal strength that determines how far it can reach.</p>
+            <p>Given the positions and strengths, find the minimum number of additional towers needed to ensure every point between the first and last tower is covered.</p>
 
-            <h2>Input</h2>
-            <p>Line 1: two integers N and K (1 ≤ N ≤ 200000, 0 ≤ K ≤ N).</p>
-            <p>Line 2: N integers p1..pN (0 ≤ pi ≤ 10^9).</p>
+            <h2>Input Format</h2>
+            <p>First line: two integers n (number of towers) and m (maximum gap allowed without coverage)</p>
+            <p>Second line: n integers representing tower positions (sorted)</p>
 
-            <h2>Output</h2>
-            <p>A single integer: the maximum covered population.</p>
+            <h2>Output Format</h2>
+            <p>Minimum number of additional towers needed.</p>
 
             <div class="example-box">
                 <h4>Example</h4>
@@ -1445,31 +1696,21 @@ int main() {
 5 1 4 9 2 3
 
 Output:
-23</pre>
-                <p><strong>Explanation:</strong> Place towers at towns 2 and 5 to cover towns 1–3 and 4–6. Total: 5+1+4+9+2+3 = 24... wait let's recalculate. Actually covering towns 1,2,3 (5+1+4=10) and towns 4,5,6 (9+2+3=14) = 24? The expected is 23 so there might be some overlap rule.</p>
-            </div>
-
-            <div class="constraints-box">
-                <h4>Constraints</h4>
-                <p>1 ≤ N ≤ 200000</p>
-                <p>0 ≤ K ≤ N</p>
-                <p>0 ≤ pi ≤ 10^9</p>
-            </div>
-
-            <div class="note-box">
-                <h4>Challenge</h4>
-                <p>Aim for an efficient solution (N can be large).</p>
+1</pre>
+                <p><strong>Explanation:</strong> Sorted positions: [1,2,3,4,5,9]. Gap between 5 and 9 is 4 > 2, so we need 1 tower.</p>
             </div>
         `,
         starterCode: {
-            python: `# Read input
-N, K = map(int, input().split())
-populations = list(map(int, input().split()))
+            python: `def min_towers_needed():
+    first_line = input().split()
+    n = int(first_line[0])
+    m = int(first_line[1])
+    
+    positions = list(map(int, input().split()))
+    
+    # Your code here
 
-# Place exactly K towers to maximize covered population
-# Tower at position i covers towns i-1, i, i+1 (if they exist)
-
-# Write your solution below
+min_towers_needed()
 `,
             javascript: `const readline = require('readline');
 const rl = readline.createInterface({
@@ -1481,13 +1722,105 @@ const lines = [];
 rl.on('line', (line) => {
     lines.push(line);
     if (lines.length === 2) {
-        const [N, K] = lines[0].split(' ').map(Number);
-        const populations = lines[1].split(' ').map(Number);
+        const [n, m] = lines[0].split(' ').map(Number);
+        const positions = lines[1].split(' ').map(Number);
         
-        // Place exactly K towers to maximize covered population
-        // Tower at position i covers towns i-1, i, i+1 (if they exist)
+        // Your code here
         
-        // Write your solution below
+        rl.close();
+    }
+});
+`,
+            java: `import java.util.Scanner;
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int n = scanner.nextInt();
+        int m = scanner.nextInt();
+        
+        int[] positions = new int[n];
+        for (int i = 0; i < n; i++) {
+            positions[i] = scanner.nextInt();
+        }
+        
+        // Your code here
+        
+        scanner.close();
+    }
+}
+`,
+            cpp: `#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+    
+    vector<int> positions(n);
+    for (int i = 0; i < n; i++) {
+        cin >> positions[i];
+    }
+    
+    // Your code here
+    
+    return 0;
+}
+`
+        }
+    },
+    {
+        id: 17,
+        title: "Sliding-Board Message",
+        difficulty: "hard",
+        description: `
+            <h2>Problem Description</h2>
+            <p>A sliding board displays messages by sliding characters from right to left.</p>
+            <p>Given two message sequences and their display patterns, determine if they could have been produced by the same sliding board configuration.</p>
+
+            <h2>Input Format</h2>
+            <p>Two lines, each containing a sequence of characters representing the visible portion of each message at a given time.</p>
+
+            <h2>Output Format</h2>
+            <p>Print "yes" if the sequences could come from the same board, "no" otherwise.</p>
+
+            <div class="example-box">
+                <h4>Example</h4>
+                <pre>Input:
+HELLO
+WORLD
+
+Output:
+yes</pre>
+            </div>
+        `,
+        starterCode: {
+            python: `def check_sliding_board():
+    seq1 = input().strip()
+    seq2 = input().strip()
+    
+    # Your code here
+
+check_sliding_board()
+`,
+            javascript: `const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+const lines = [];
+rl.on('line', (line) => {
+    lines.push(line.trim());
+    if (lines.length === 2) {
+        const seq1 = lines[0];
+        const seq2 = lines[1];
+        
+        // Your code here
         
         rl.close();
     }
@@ -1498,39 +1831,26 @@ rl.on('line', (line) => {
 public class Solution {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        int K = scanner.nextInt();
-        long[] populations = new long[N];
         
-        for (int i = 0; i < N; i++) {
-            populations[i] = scanner.nextLong();
-        }
+        String seq1 = scanner.nextLine().trim();
+        String seq2 = scanner.nextLine().trim();
         
-        // Place exactly K towers to maximize covered population
-        // Tower at position i covers towns i-1, i, i+1 (if they exist)
+        // Your code here
         
-        // Write your solution below
-        
+        scanner.close();
     }
 }
 `,
             cpp: `#include <iostream>
-#include <vector>
+#include <string>
 using namespace std;
 
 int main() {
-    int N, K;
-    cin >> N >> K;
+    string seq1, seq2;
+    getline(cin, seq1);
+    getline(cin, seq2);
     
-    vector<long long> populations(N);
-    for (int i = 0; i < N; i++) {
-        cin >> populations[i];
-    }
-    
-    // Place exactly K towers to maximize covered population
-    // Tower at position i covers towns i-1, i, i+1 (if they exist)
-    
-    // Write your solution below
+    // Your code here
     
     return 0;
 }
@@ -1538,256 +1858,450 @@ int main() {
         }
     },
     {
-        id: 15,
-        title: "Sliding-Board Message",
+        id: 18,
+        title: "Longest Substring Without Repeating Characters",
         difficulty: "hard",
         description: `
             <h2>Problem Description</h2>
-            <p>You have a 4×4 board with tiles numbered 1–15 and one blank space (bottom-right in the starting position).</p>
-            <p>A move is written as the number on the tile that slides into the current blank (it must be adjacent).</p>
-            <p>For each move sequence: start from the initial board, apply the moves, then look at the tiles adjacent to the blank.</p>
-            <p>Let A be the smallest adjacent number and B be the largest adjacent number. Compute A + B.</p>
-            <p>Convert 1→A, 2→B, …, 26→Z (wrap around if needed).</p>
-            <p>Process each sequence independently (resetting the board each time) and print the decoded message (no spaces).</p>
+            <p>Given a string <code>s</code>, find the length of the <strong>longest substring</strong> without repeating characters.</p>
+            <p>A <strong>substring</strong> is a contiguous non-empty sequence of characters within a string.</p>
 
-            <h2>Initial Board State</h2>
-            <pre> 1  2  3  4
- 5  6  7  8
- 9 10 11 12
-13 14 15  _</pre>
-
-            <h2>Move Sequences</h2>
-            <pre>15, 11, 7, 3, 2, 1, 5
-12, 8, 4, 3
-15, 14, 10, 11, 12, 15
-12, 8, 4, 3, 7, 4, 3, 7, 4, 6, 2
-15, 11, 7, 6, 2, 3, 6
-12, 11, 10, 6, 7, 8, 11, 12, 15, 10, 12, 11, 8
-12, 11, 10, 14, 15, 10, 14, 9, 13</pre>
+            <h2>Input</h2>
+            <p>A string s.</p>
 
             <h2>Output</h2>
-            <p>Print the decoded message as uppercase letters with no spaces.</p>
+            <p>The length of the longest substring without repeating characters.</p>
+
+            <div class="example-box">
+                <h4>Example 1</h4>
+                <pre>Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2</h4>
+                <pre>Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3</h4>
+                <pre>Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.</pre>
+            </div>
+
+            <h2>Constraints</h2>
+            <ul>
+                <li>0 ≤ s.length ≤ 5 × 10<sup>4</sup></li>
+                <li>s consists of English letters, digits, symbols and spaces.</li>
+            </ul>
         `,
         starterCode: {
-            python: `# 15-puzzle sliding board message decoder
-
-def create_initial_board():
-    """Create the initial 4x4 board state."""
-    board = []
-    for i in range(4):
-        row = []
-        for j in range(4):
-            num = i * 4 + j + 1
-            if num == 16:
-                row.append(0)  # blank
-            else:
-                row.append(num)
-        board.append(row)
-    return board
-
-def find_blank(board):
-    """Find the position of the blank space."""
-    for i in range(4):
-        for j in range(4):
-            if board[i][j] == 0:
-                return (i, j)
-    return None
-
-def apply_move(board, tile):
-    """Slide the tile into the blank space."""
-    # Write your implementation
+            python: `def length_of_longest_substring(s):
+    # Your code here
     pass
 
-def get_adjacent_tiles(board):
-    """Get tiles adjacent to the blank space."""
-    # Write your implementation
-    pass
-
-def decode_sequence(moves):
-    """Process a move sequence and return the decoded letter."""
-    # Write your implementation
-    pass
-
-# Move sequences to process
-sequences = [
-    [15, 11, 7, 3, 2, 1, 5],
-    [12, 8, 4, 3],
-    [15, 14, 10, 11, 12, 15],
-    [12, 8, 4, 3, 7, 4, 3, 7, 4, 6, 2],
-    [15, 11, 7, 6, 2, 3, 6],
-    [12, 11, 10, 6, 7, 8, 11, 12, 15, 10, 12, 11, 8],
-    [12, 11, 10, 14, 15, 10, 14, 9, 13]
-]
-
-# Decode and print the message
-message = ""
-for seq in sequences:
-    message += decode_sequence(seq)
-
-print(message)
+print(length_of_longest_substring("abcabcbb"))
+print(length_of_longest_substring("bbbbb"))
+print(length_of_longest_substring("pwwkew"))
 `,
-            javascript: `// 15-puzzle sliding board message decoder
-
-function createInitialBoard() {
-    const board = [];
-    for (let i = 0; i < 4; i++) {
-        const row = [];
-        for (let j = 0; j < 4; j++) {
-            const num = i * 4 + j + 1;
-            row.push(num === 16 ? 0 : num);
-        }
-        board.push(row);
-    }
-    return board;
+            javascript: `function lengthOfLongestSubstring(s) {
+    // Your code here
+    
 }
 
-function findBlank(board) {
-    for (let i = 0; i < 4; i++) {
-        for (let j = 0; j < 4; j++) {
-            if (board[i][j] === 0) {
-                return [i, j];
-            }
-        }
-    }
-    return null;
-}
-
-function applyMove(board, tile) {
-    // Write your implementation
-}
-
-function getAdjacentTiles(board) {
-    // Write your implementation
-}
-
-function decodeSequence(moves) {
-    // Write your implementation
-}
-
-// Move sequences to process
-const sequences = [
-    [15, 11, 7, 3, 2, 1, 5],
-    [12, 8, 4, 3],
-    [15, 14, 10, 11, 12, 15],
-    [12, 8, 4, 3, 7, 4, 3, 7, 4, 6, 2],
-    [15, 11, 7, 6, 2, 3, 6],
-    [12, 11, 10, 6, 7, 8, 11, 12, 15, 10, 12, 11, 8],
-    [12, 11, 10, 14, 15, 10, 14, 9, 13]
-];
-
-// Decode and print the message
-let message = "";
-for (const seq of sequences) {
-    message += decodeSequence(seq);
-}
-
-console.log(message);
+console.log(lengthOfLongestSubstring("abcabcbb"));
+console.log(lengthOfLongestSubstring("bbbbb"));
+console.log(lengthOfLongestSubstring("pwwkew"));
 `,
-            java: `public class Solution {
-    
-    public static int[][] createInitialBoard() {
-        int[][] board = new int[4][4];
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                int num = i * 4 + j + 1;
-                board[i][j] = (num == 16) ? 0 : num;
-            }
-        }
-        return board;
-    }
-    
-    public static int[] findBlank(int[][] board) {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (board[i][j] == 0) {
-                    return new int[]{i, j};
-                }
-            }
-        }
-        return null;
-    }
-    
-    public static void applyMove(int[][] board, int tile) {
-        // Write your implementation
-    }
-    
-    public static char decodeSequence(int[] moves) {
-        // Write your implementation
-        return ' ';
+            java: `import java.util.HashSet;
+import java.util.Set;
+
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        // Your code here
+        
+        return 0;
     }
     
     public static void main(String[] args) {
-        int[][] sequences = {
-            {15, 11, 7, 3, 2, 1, 5},
-            {12, 8, 4, 3},
-            {15, 14, 10, 11, 12, 15},
-            {12, 8, 4, 3, 7, 4, 3, 7, 4, 6, 2},
-            {15, 11, 7, 6, 2, 3, 6},
-            {12, 11, 10, 6, 7, 8, 11, 12, 15, 10, 12, 11, 8},
-            {12, 11, 10, 14, 15, 10, 14, 9, 13}
-        };
+        Solution sol = new Solution();
         
-        StringBuilder message = new StringBuilder();
-        for (int[] seq : sequences) {
-            message.append(decodeSequence(seq));
+        System.out.println(sol.lengthOfLongestSubstring("abcabcbb"));
+        System.out.println(sol.lengthOfLongestSubstring("bbbbb"));
+        System.out.println(sol.lengthOfLongestSubstring("pwwkew"));
+    }
+}
+`,
+            cpp: `#include <iostream>
+#include <string>
+#include <unordered_set>
+using namespace std;
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        // Your code here
+        
+        return 0;
+    }
+};
+
+int main() {
+    Solution sol;
+    
+    cout << sol.lengthOfLongestSubstring("abcabcbb") << endl;
+    cout << sol.lengthOfLongestSubstring("bbbbb") << endl;
+    cout << sol.lengthOfLongestSubstring("pwwkew") << endl;
+    
+    return 0;
+}
+`
         }
+    },
+    {
+        id: 19,
+        title: "Trapping Rain Water",
+        difficulty: "hard",
+        description: `
+            <h2>Problem Description</h2>
+            <p>Given <code>n</code> non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.</p>
+
+            <h2>Input</h2>
+            <p>An array of non-negative integers representing the elevation map.</p>
+
+            <h2>Output</h2>
+            <p>The total amount of water that can be trapped.</p>
+
+            <div class="example-box">
+                <h4>Example 1</h4>
+                <pre>Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+Output: 6
+Explanation: The elevation map is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. 
+In this case, 6 units of rain water are being trapped.</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2</h4>
+                <pre>Input: height = [4,2,0,3,2,5]
+Output: 9</pre>
+            </div>
+
+            <h2>Constraints</h2>
+            <ul>
+                <li>n == height.length</li>
+                <li>1 ≤ n ≤ 2 × 10<sup>4</sup></li>
+                <li>0 ≤ height[i] ≤ 10<sup>5</sup></li>
+            </ul>
+
+            <h2>Hint</h2>
+            <p>Think about how much water can be stored above each bar. It depends on the maximum height to the left and right of that bar.</p>
+        `,
+        starterCode: {
+            python: `def trap(height):
+    # Your code here
+    pass
+
+print(trap([0,1,0,2,1,0,1,3,2,1,2,1]))
+print(trap([4,2,0,3,2,5]))
+`,
+            javascript: `function trap(height) {
+    // Your code here
+    
+}
+
+console.log(trap([0,1,0,2,1,0,1,3,2,1,2,1]));
+console.log(trap([4,2,0,3,2,5]));
+`,
+            java: `public class Solution {
+    public int trap(int[] height) {
+        // Your code here
         
-        System.out.println(message.toString());
+        return 0;
+    }
+    
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        System.out.println(sol.trap(
+            new int[]{0,1,0,2,1,0,1,3,2,1,2,1}
+        ));
+        
+        System.out.println(sol.trap(
+            new int[]{4,2,0,3,2,5}
+        ));
     }
 }
 `,
             cpp: `#include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
-vector<vector<int>> createInitialBoard() {
-    vector<vector<int>> board(4, vector<int>(4));
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            int num = i * 4 + j + 1;
-            board[i][j] = (num == 16) ? 0 : num;
-        }
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        // Your code here
+        
+        return 0;
     }
-    return board;
-}
+};
 
-pair<int, int> findBlank(vector<vector<int>>& board) {
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            if (board[i][j] == 0) {
-                return {i, j};
-            }
+int main() {
+    Solution sol;
+    
+    vector<int> h1 = {0,1,0,2,1,0,1,3,2,1,2,1};
+    cout << sol.trap(h1) << endl;
+    
+    vector<int> h2 = {4,2,0,3,2,5};
+    cout << sol.trap(h2) << endl;
+    
+    return 0;
+}
+`
         }
+    },
+    {
+        id: 20,
+        title: "Merge K Sorted Lists",
+        difficulty: "hard",
+        description: `
+            <h2>Problem Description</h2>
+            <p>You are given an array of <code>k</code> linked-lists <code>lists</code>, each linked-list is sorted in ascending order.</p>
+            <p>Merge all the linked-lists into one sorted linked-list and return it.</p>
+
+            <h2>Input</h2>
+            <p>An array of k sorted linked lists.</p>
+
+            <h2>Output</h2>
+            <p>A single sorted linked list containing all elements.</p>
+
+            <div class="example-box">
+                <h4>Example 1</h4>
+                <pre>Input: lists = [[1,4,5],[1,3,4],[2,6]]
+Output: [1,1,2,3,4,4,5,6]
+Explanation: The linked-lists are:
+[
+  1->4->5,
+  1->3->4,
+  2->6
+]
+Merging them into one sorted list:
+1->1->2->3->4->4->5->6</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2</h4>
+                <pre>Input: lists = []
+Output: []</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3</h4>
+                <pre>Input: lists = [[]]
+Output: []</pre>
+            </div>
+
+            <h2>Constraints</h2>
+            <ul>
+                <li>k == lists.length</li>
+                <li>0 ≤ k ≤ 10<sup>4</sup></li>
+                <li>0 ≤ lists[i].length ≤ 500</li>
+                <li>-10<sup>4</sup> ≤ lists[i][j] ≤ 10<sup>4</sup></li>
+                <li>lists[i] is sorted in ascending order.</li>
+                <li>The sum of lists[i].length will not exceed 10<sup>4</sup>.</li>
+            </ul>
+
+            <h2>Hint</h2>
+            <p>Consider using a min-heap (priority queue) to efficiently get the smallest element among all list heads.</p>
+        `,
+        starterCode: {
+            python: `import heapq
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def merge_k_lists(lists):
+    # Your code here
+    pass
+
+def create_list(arr):
+    if not arr:
+        return None
+    head = ListNode(arr[0])
+    curr = head
+    for val in arr[1:]:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return head
+
+def print_list(head):
+    result = []
+    while head:
+        result.append(head.val)
+        head = head.next
+    print(result)
+
+lists = [
+    create_list([1, 4, 5]),
+    create_list([1, 3, 4]),
+    create_list([2, 6])
+]
+result = merge_k_lists(lists)
+print_list(result)
+`,
+            javascript: `class ListNode {
+    constructor(val = 0, next = null) {
+        this.val = val;
+        this.next = next;
     }
-    return {-1, -1};
 }
 
-void applyMove(vector<vector<int>>& board, int tile) {
-    // Write your implementation
+function mergeKLists(lists) {
+    // Your code here
+    
 }
 
-char decodeSequence(vector<int>& moves) {
-    // Write your implementation
-    return ' ';
+function createList(arr) {
+    if (!arr || arr.length === 0) return null;
+    const head = new ListNode(arr[0]);
+    let curr = head;
+    for (let i = 1; i < arr.length; i++) {
+        curr.next = new ListNode(arr[i]);
+        curr = curr.next;
+    }
+    return head;
+}
+
+function printList(head) {
+    const result = [];
+    while (head) {
+        result.push(head.val);
+        head = head.next;
+    }
+    console.log(result);
+}
+
+const lists = [
+    createList([1, 4, 5]),
+    createList([1, 3, 4]),
+    createList([2, 6])
+];
+const result = mergeKLists(lists);
+printList(result);
+`,
+            java: `import java.util.*;
+
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int val) { this.val = val; }
+}
+
+public class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        // Your code here
+        
+        return null;
+    }
+    
+    static ListNode createList(int[] arr) {
+        if (arr.length == 0) return null;
+        ListNode head = new ListNode(arr[0]);
+        ListNode curr = head;
+        for (int i = 1; i < arr.length; i++) {
+            curr.next = new ListNode(arr[i]);
+            curr = curr.next;
+        }
+        return head;
+    }
+    
+    static void printList(ListNode head) {
+        List<Integer> result = new ArrayList<>();
+        while (head != null) {
+            result.add(head.val);
+            head = head.next;
+        }
+        System.out.println(result);
+    }
+    
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        ListNode[] lists = {
+            createList(new int[]{1, 4, 5}),
+            createList(new int[]{1, 3, 4}),
+            createList(new int[]{2, 6})
+        };
+        
+        ListNode result = sol.mergeKLists(lists);
+        printList(result);
+    }
+}
+`,
+            cpp: `#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+struct ListNode {
+    int val;
+    ListNode* next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        // Your code here
+        
+        return nullptr;
+    }
+};
+
+ListNode* createList(vector<int>& arr) {
+    if (arr.empty()) return nullptr;
+    ListNode* head = new ListNode(arr[0]);
+    ListNode* curr = head;
+    for (int i = 1; i < arr.size(); i++) {
+        curr->next = new ListNode(arr[i]);
+        curr = curr->next;
+    }
+    return head;
+}
+
+void printList(ListNode* head) {
+    cout << "[";
+    while (head) {
+        cout << head->val;
+        if (head->next) cout << ", ";
+        head = head->next;
+    }
+    cout << "]" << endl;
 }
 
 int main() {
-    vector<vector<int>> sequences = {
-        {15, 11, 7, 3, 2, 1, 5},
-        {12, 8, 4, 3},
-        {15, 14, 10, 11, 12, 15},
-        {12, 8, 4, 3, 7, 4, 3, 7, 4, 6, 2},
-        {15, 11, 7, 6, 2, 3, 6},
-        {12, 11, 10, 6, 7, 8, 11, 12, 15, 10, 12, 11, 8},
-        {12, 11, 10, 14, 15, 10, 14, 9, 13}
+    Solution sol;
+    
+    vector<int> a1 = {1, 4, 5};
+    vector<int> a2 = {1, 3, 4};
+    vector<int> a3 = {2, 6};
+    
+    vector<ListNode*> lists = {
+        createList(a1),
+        createList(a2),
+        createList(a3)
     };
     
-    string message = "";
-    for (auto& seq : sequences) {
-        message += decodeSequence(seq);
-    }
+    ListNode* result = sol.mergeKLists(lists);
+    printList(result);
     
-    cout << message << endl;
     return 0;
 }
 `
