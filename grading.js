@@ -474,22 +474,32 @@ GRADING CRITERIA (${points} points total):
 - CODE WORKS (30%): ${Math.round(points * 0.3)} pts - Does the code run without errors? Is the logic sound?
 - GOOD APPROACH (20%): ${Math.round(points * 0.2)} pts - Is the approach reasonable for this problem?
 
-HOW TO GRADE:
-1. If output is CORRECT: Award full 50% for output + most/all of the remaining 50%
+⚠️ CHEATING DETECTION - IMPORTANT:
+If the student just hardcoded print statements with the expected output (e.g., "print(1568)" or "console.log([0,1])") WITHOUT actually computing the answer:
+- Give 0 points for "Correct Output" - they didn't earn it
+- Give 0 points for "Code Works" - there's no real logic
+- Give 0-10% for "Approach" only if they show SOME understanding
+- Maximum score for hardcoded answers: ${Math.round(points * 0.1)} pts (10%)
+
+Signs of hardcoding/cheating:
+- Print statements with literal expected values
+- No variables, loops, or logic that processes the input
+- No use of the input values in calculations
+- Just outputting the example answer directly
+
+HOW TO GRADE (if NOT cheating):
+1. If output is CORRECT with real logic: Award full 50% for output + most/all of remaining 50%
 2. If output is WRONG but code runs and shows good thinking: Award 30-50% total
 3. If code has errors but approach is right: Award 20-40% total
 4. If code shows some effort but major issues: Award 10-20% total
-5. Only give 0 if code is empty or completely unrelated
-
-BE LENIENT - reward effort and good thinking!
 
 RESPOND IN THIS EXACT FORMAT:
 SCORE: [number out of ${points}]
-FEEDBACK: [2-3 encouraging sentences - what they did well, then gentle suggestions]
+FEEDBACK: [2-3 sentences - if cheating detected, explain why hardcoding doesn't count. Otherwise be encouraging]
 BREAKDOWN: [Output: X/${Math.round(points * 0.5)}, Code Works: X/${Math.round(points * 0.3)}, Approach: X/${Math.round(points * 0.2)}]
-SUGGESTION: [One helpful tip, or "Great job!" if full marks]
+SUGGESTION: [One helpful tip, or call out the cheating if detected]
 
-Be encouraging! Focus on what they did RIGHT.`;
+Be encouraging for real attempts! But don't reward hardcoded answers.`;
 }
 
 // Strip HTML from description
