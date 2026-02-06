@@ -16,7 +16,6 @@ const outputArea = document.getElementById('outputArea');
 const navLinks = document.querySelectorAll('.nav-link');
 const lineNumbers = document.getElementById('lineNumbers');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
-const prettyPrintBtn = document.getElementById('prettyPrintBtn');
 const codeEditorSection = document.querySelector('.code-editor-section');
 
 // State
@@ -829,11 +828,10 @@ function setupEventListeners() {
         }
     });
     
-    // Pretty print button
-    prettyPrintBtn.addEventListener('click', prettyPrintCode);
-    
     // Fullscreen toggle
-    fullscreenBtn.addEventListener('click', toggleFullscreen);
+    if (fullscreenBtn) {
+        fullscreenBtn.addEventListener('click', toggleFullscreen);
+    }
     
     // Escape key to exit fullscreen
     document.addEventListener('keydown', (e) => {

@@ -455,7 +455,7 @@ function unlockEditor() {
 
 // Create grading prompt for Claude
 function createGradingPrompt(problem, code, language, points) {
-    return `You are a coding challenge grader. Grade the following solution with partial marks for methodology.
+    return `You are a friendly and encouraging coding challenge grader.
 
 PROBLEM: ${problem.title}
 DIFFICULTY: ${problem.difficulty.toUpperCase()} (${points} points total)
@@ -469,29 +469,27 @@ STUDENT'S CODE:
 ${code}
 \`\`\`
 
-GRADING RUBRIC (${points} points total):
-Award partial marks based on the following criteria:
+GRADING CRITERIA (${points} points total):
+- CORRECT OUTPUT (50%): ${Math.round(points * 0.5)} pts - Does the code produce the right answer?
+- CODE WORKS (30%): ${Math.round(points * 0.3)} pts - Does the code run without errors? Is the logic sound?
+- GOOD APPROACH (20%): ${Math.round(points * 0.2)} pts - Is the approach reasonable for this problem?
 
-For ${points} point problems, distribute marks as follows:
-- Correct understanding of problem (${Math.ceil(points * 0.2)} pts): Shows they understood what was being asked
-- Appropriate approach/algorithm (${Math.ceil(points * 0.3)} pts): Used a reasonable method to solve it
-- Correct implementation (${Math.ceil(points * 0.3)} pts): Code logic is sound and handles main cases
-- Complete solution that works (${Math.ceil(points * 0.2)} pts): Produces correct output for examples
+HOW TO GRADE:
+1. If output is CORRECT: Award full 50% for output + most/all of the remaining 50%
+2. If output is WRONG but code runs and shows good thinking: Award 30-50% total
+3. If code has errors but approach is right: Award 20-40% total
+4. If code shows some effort but major issues: Award 10-20% total
+5. Only give 0 if code is empty or completely unrelated
 
-GRADING GUIDELINES:
-1. Give method marks even if final answer is wrong - reward good thinking
-2. A student who shows understanding but has a bug should get partial credit
-3. A student with correct approach but incomplete code should get partial credit
-4. Only give 0 if the code shows no understanding of the problem
-5. Full marks (${points}/${points}) only if solution is fully correct
+BE LENIENT - reward effort and good thinking!
 
 RESPOND IN THIS EXACT FORMAT:
 SCORE: [number out of ${points}]
-FEEDBACK: [2-3 sentences explaining what the student did well and what needs improvement]
-BREAKDOWN: [Brief breakdown: Understanding X/${Math.ceil(points * 0.2)}, Approach X/${Math.ceil(points * 0.3)}, Implementation X/${Math.ceil(points * 0.3)}, Correctness X/${Math.ceil(points * 0.2)}]
-SUGGESTION: [One specific suggestion to improve, or "Excellent work!" if full marks]
+FEEDBACK: [2-3 encouraging sentences - what they did well, then gentle suggestions]
+BREAKDOWN: [Output: X/${Math.round(points * 0.5)}, Code Works: X/${Math.round(points * 0.3)}, Approach: X/${Math.round(points * 0.2)}]
+SUGGESTION: [One helpful tip, or "Great job!" if full marks]
 
-Be encouraging but fair. Reward effort and good methodology.`;
+Be encouraging! Focus on what they did RIGHT.`;
 }
 
 // Strip HTML from description
