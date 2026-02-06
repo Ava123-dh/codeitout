@@ -440,10 +440,23 @@ builtins.input = _mock_input
         
         // Run the user's code
         try {
-            pyodide.runPython(code);
+            await pyodide.runPythonAsync(code);
         } catch (e) {
-            const stderr = pyodide.runPython('sys.stderr.getvalue()');
-            return { success: false, output: stderr || e.message };
+            // Try to get stderr, but if that fails too, show the error message
+            try {
+                const stderr = pyodide.runPython('sys.stderr.getvalue()');
+                if (stderr && stderr.trim()) {
+                    return { success: false, output: stderr };
+                }
+            } catch (e2) {
+                // Ignore
+            }
+            // Extract just the useful part of the error
+            let errorMsg = e.message || String(e);
+            // Clean up Pyodide internal paths from error
+            errorMsg = errorMsg.replace(/File "\/lib\/python[^"]+", line \d+, in [^\n]+\n/g, '');
+            errorMsg = errorMsg.replace(/\s*\^+\s*/g, '\n');
+            return { success: false, output: `Error:\n${errorMsg}` };
         }
         
         // Get the output
