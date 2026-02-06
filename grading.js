@@ -179,7 +179,8 @@ async function gradeWithClaude(problemId, code, language) {
     const apiKey = getApiKey();
     
     if (!apiKey) {
-        showNotification('API key not set. Please add your key in grading.js', 'error');
+        showApiModal();
+        showNotification('Please enter your Anthropic API key to grade solutions', 'error');
         return null;
     }
     
