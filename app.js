@@ -593,7 +593,7 @@ function getExampleInput(problemId) {
         9: '()[]{}',                           // Valid Parentheses
         10: '7 1 5 3 6 4',                     // Best Time to Buy and Sell Stock
         11: '4',                               // Hourglass
-        12: '(grid navigation - see problem description)',  // Honeycomb Route
+        12: '4\n13\n7', // Honeycomb Route
         13: '4\n1 4 3 2\n2 3 1 4\n3 2 4 1\n0 0 0 0',  // Latin Square Completion
         14: 'aabxbaa',                         // Recursive Palindrome Cleanup
         15: '3 2 2 3\n3',                      // Remove Element
