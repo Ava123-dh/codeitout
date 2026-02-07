@@ -1932,14 +1932,11 @@ def find_treasure():
     triangles = []
     px, py = 0, 0
     
-    # Read all lines until we find X
+    # Read lines until we find X
     while True:
-        try:
-            line = input().strip()
-        except EOFError:
-            break
+        line = input().strip()
         if not line:
-            continue
+            break
         # Split by colon to get name and coordinates
         parts = line.split(':')
         name = parts[0].strip()

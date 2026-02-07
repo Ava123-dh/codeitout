@@ -586,11 +586,16 @@ function getExampleInput(problemId) {
         8: '(array input - see problem description)',
         9: '(class implementation - see problem description)',
         10: '4\n13\n7',
-        11: '4\n1432\n2314\n3241',
-        12: 'aabxbaa',
-        13: '(array input - see problem description)',
-        14: '6 2\n5 1 4 9 2 3',
-        15: '(predefined sequences - see problem description)'
+        11: '4',
+        12: '(grid navigation - see problem description)',
+        13: '4\n1 4 3 2\n2 3 1 4\n3 2 4 1\n0 0 0 0',
+        14: 'aabxbaa',
+        15: '(array input - see problem description)',
+        16: '(tower coverage - see problem description)',
+        17: 'T1: (-3,4),(-1,3),(-2,1)\nT2: (1,1),(3,1),(2,3)\nX: (2,-1)',
+        18: 'abcabcbb',
+        19: '0,1,0,2,1,0,1,3,2,1,2,1',
+        20: '(linked lists - see problem description)'
     };
     return examples[problemId] || '(see problem description)';
 }
