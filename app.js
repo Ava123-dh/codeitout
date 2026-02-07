@@ -412,14 +412,20 @@ async function runPythonCode(code) {
         const exampleInput = getExampleInput(currentProblem.id);
         const inputLines = exampleInput.split('\n');
         
-        // Setup Python environment with mocked input
+        // Reset Python environment completely before each run
         pyodide.runPython(`
 import sys
 from io import StringIO
 
-# Setup stdout/stderr capture
+# Clear and reset stdout/stderr capture
 sys.stdout = StringIO()
 sys.stderr = StringIO()
+
+# Reset any global variables by clearing user-defined globals
+_keep = {'sys', 'StringIO', '__builtins__', '__name__', '__doc__', '__package__', '__loader__', '__spec__', 'builtins', '_mock_input', '_input_lines', '_input_index'}
+_to_delete = [k for k in list(globals().keys()) if k not in _keep and not k.startswith('_')]
+for k in _to_delete:
+    del globals()[k]
 
 # Mock input function with example inputs
 _input_lines = ${JSON.stringify(inputLines)}
