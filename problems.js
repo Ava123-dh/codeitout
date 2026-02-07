@@ -498,48 +498,83 @@ int main() {
     },
     {
         id: 6,
-        title: "Revision Schedule",
+        title: "Double Double",
         difficulty: "medium",
         description: `
             <h2>Problem Description</h2>
-            <p>A student has N days to revise. Each day they can revise one subject.</p>
-            <p>They want to maximize variety: no subject should be revised on two consecutive days.</p>
-            <p>Given N days and a list of subjects, output a valid revision schedule or "impossible" if it can't be done.</p>
+            <p>In basketball, a <strong>double-double</strong> is a performance in which a player accumulates a double-digit total (10 or more) in two of five statistical categories — points, rebounds, assists, steals, and blocked shots — in a game.</p>
+            <p>Given the player's statistics, write a program to check if the player has achieved a double-double.</p>
 
             <h2>Input</h2>
-            <p>First line: N (number of days)</p>
-            <p>Second line: space-separated list of subjects (at least 2 subjects)</p>
+            <p>The input consists of five lines where each line corresponds to a statistic:</p>
+            <ul>
+                <li><strong>points</strong> (integer): The number of points scored by the player.</li>
+                <li><strong>rebounds</strong> (integer): The number of rebounds made by the player.</li>
+                <li><strong>assists</strong> (integer): The number of assists made by the player.</li>
+                <li><strong>steals</strong> (integer): The number of steals made by the player.</li>
+                <li><strong>blocks</strong> (integer): The number of blocks made by the player.</li>
+            </ul>
 
             <h2>Output</h2>
-            <p>N lines, each with one subject for that day. No two consecutive days should have the same subject.</p>
-            <p>If impossible, print "impossible".</p>
+            <p>A boolean value (<code>True</code> or <code>False</code>) indicating whether the player has achieved a double-double.</p>
+            <p>If the value is <code>True</code>, also print the first two statistics that are double-digit in the order they appear.</p>
 
             <div class="example-box">
-                <h4>Example</h4>
+                <h4>Example 1</h4>
                 <pre>Input:
-22
-math science english history
+25
+12
+8
+2
+1
 
 Output:
-math
-science
-math
-science
-...</pre>
+True
+points rebounds</pre>
             </div>
+
+            <div class="example-box">
+                <h4>Example 2</h4>
+                <pre>Input:
+15
+5
+11
+3
+10
+
+Output:
+True
+points assists</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3</h4>
+                <pre>Input:
+8
+7
+5
+3
+2
+
+Output:
+False</pre>
+            </div>
+
+            <h2>Explanation</h2>
+            <p>In Example 1, the player scored 25 points and 12 rebounds, both double-digit numbers, so it's a double-double.</p>
+            <p>In Example 3, no two statistics are double-digit, so it's not a double-double.</p>
         `,
         starterCode: {
-            python: `def create_schedule():
-    n = int(input())
-    subjects = input().split()
-    
-    if len(subjects) < 2:
-        print("impossible")
-        return
+            python: `def check_double_double():
+    points = int(input())
+    rebounds = int(input())
+    assists = int(input())
+    steals = int(input())
+    blocks = int(input())
     
     # Your code here
 
-create_schedule()
+check_double_double()
 `,
             javascript: `const readline = require('readline');
 const rl = readline.createInterface({
@@ -547,18 +582,15 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-const lines = [];
+const stats = [];
 rl.on('line', (line) => {
-    lines.push(line);
-    if (lines.length === 2) {
-        const n = parseInt(lines[0]);
-        const subjects = lines[1].split(' ');
-        
-        if (subjects.length < 2) {
-            console.log("impossible");
-            rl.close();
-            return;
-        }
+    stats.push(parseInt(line));
+    if (stats.length === 5) {
+        const points = stats[0];
+        const rebounds = stats[1];
+        const assists = stats[2];
+        const steals = stats[3];
+        const blocks = stats[4];
         
         // Your code here
         
@@ -572,14 +604,11 @@ public class Solution {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        int n = scanner.nextInt();
-        scanner.nextLine();
-        String[] subjects = scanner.nextLine().split(" ");
-        
-        if (subjects.length < 2) {
-            System.out.println("impossible");
-            return;
-        }
+        int points = scanner.nextInt();
+        int rebounds = scanner.nextInt();
+        int assists = scanner.nextInt();
+        int steals = scanner.nextInt();
+        int blocks = scanner.nextInt();
         
         // Your code here
         
@@ -588,29 +617,13 @@ public class Solution {
 }
 `,
             cpp: `#include <iostream>
+#include <string>
 #include <vector>
-#include <sstream>
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
-    cin.ignore();
-    
-    string line;
-    getline(cin, line);
-    
-    vector<string> subjects;
-    stringstream ss(line);
-    string subject;
-    while (ss >> subject) {
-        subjects.push_back(subject);
-    }
-    
-    if (subjects.size() < 2) {
-        cout << "impossible" << endl;
-        return 0;
-    }
+    int points, rebounds, assists, steals, blocks;
+    cin >> points >> rebounds >> assists >> steals >> blocks;
     
     // Your code here
     
@@ -1046,127 +1059,123 @@ int main() {
     },
     {
         id: 11,
-        title: "Feeder Simulation",
-        difficulty: "hard",
+        title: "Hourglass",
+        difficulty: "medium",
         description: `
             <h2>Problem Description</h2>
-            <p>This question involves a <code>Feeder</code> class that tracks how much food (in grams) is currently available and simulates what happens over time.</p>
-            <p>Write a method that simulates one day of activity, updating the feeder's current food level.</p>
+            <p>An hourglass is an ancient device used to measure time. It has two glass bulbs connected by a narrow tube, and sand flows from the top bulb to the bottom one in a set amount of time, usually an hour.</p>
+            <p>Can you write a program that takes an even integer <strong>n</strong> as input and draws an ASCII art hourglass of height <strong>n</strong>?</p>
 
-            <h2>Given Class Skeleton</h2>
-            <pre>public class Feeder {
-    private int currentFood; // grams, always ≥ 0
-    public void simulateOneDay(int numBirds) { /* to be written */ }
-}</pre>
+            <h2>Input</h2>
+            <p>The input consists of a single positive even integer <strong>n</strong>.</p>
 
-            <h2>simulateOneDay</h2>
-            <p>Simulate one day with numBirds > 0:</p>
+            <h2>Output</h2>
+            <p>The output is an ASCII art hourglass with <strong>n</strong> rows (not counting the top and bottom borders) as shown in the examples.</p>
+            <p>The hourglass uses these characters:</p>
             <ul>
-                <li><strong>With 95% probability:</strong> only birds visit; each bird eats the same randomly chosen integer amount between 10 and 50 grams (inclusive). Total eaten = numBirds × perBird. If total eaten exceeds currentFood, currentFood becomes 0.</li>
-                <li><strong>With 5% probability:</strong> a bear visits and empties the feeder (currentFood becomes 0).</li>
+                <li><code>=</code> for the top and bottom borders (not counted in height)</li>
+                <li><code>|</code> for the left and right edges</li>
+                <li><code>\\</code> and <code>/</code> for the diagonal lines</li>
+                <li><code>*</code> for the sand/fill</li>
             </ul>
 
-            <div class="note-box">
-                <h4>Note</h4>
-                <p>Can be written in any programming language.</p>
+            <div class="example-box">
+                <h4>Example 1</h4>
+                <pre>Input:
+2
+
+Output:
+|====|
+|\\**/|
+|/**\\|
+|====|</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2</h4>
+                <pre>Input:
+4
+
+Output:
+|======|
+|\\****/|
+| \\**/ |
+| /**\\ |
+|/****\\|
+|======|</pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3</h4>
+                <pre>Input:
+8
+
+Output:
+|==========|
+|\\********/|
+| \\******/ |
+|  \\****/  |
+|   \\**/   |
+|   /**\\   |
+|  /****\\  |
+| /******\\ |
+|/********\\|
+|==========|</pre>
             </div>
         `,
         starterCode: {
-            python: `import random
+            python: `def draw_hourglass(n):
+    # Your code here
+    pass
 
-class Feeder:
-    def __init__(self, initial_food=0):
-        self.current_food = initial_food
-    
-    def simulate_one_day(self, num_birds):
-        # Your code here
-        pass
-    
-    def get_food(self):
-        return self.current_food
-
-feeder = Feeder(1000)
-print(f"Initial food: {feeder.get_food()}")
-feeder.simulate_one_day(5)
-print(f"After day 1: {feeder.get_food()}")
+n = int(input())
+draw_hourglass(n)
 `,
-            javascript: `class Feeder {
-    constructor(initialFood = 0) {
-        this.currentFood = initialFood;
-    }
+            javascript: `const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+function drawHourglass(n) {
+    // Your code here
     
-    simulateOneDay(numBirds) {
-        // Your code here
-        
-    }
-    
-    getFood() {
-        return this.currentFood;
-    }
 }
 
-const feeder = new Feeder(1000);
-console.log(\`Initial food: \${feeder.getFood()}\`);
-feeder.simulateOneDay(5);
-console.log(\`After day 1: \${feeder.getFood()}\`);
+rl.on('line', (line) => {
+    const n = parseInt(line.trim());
+    drawHourglass(n);
+    rl.close();
+});
 `,
-            java: `import java.util.Random;
+            java: `import java.util.Scanner;
 
-public class Feeder {
-    private int currentFood;
-    private Random random = new Random();
-    
-    public Feeder(int initialFood) {
-        this.currentFood = initialFood;
-    }
-    
-    public void simulateOneDay(int numBirds) {
+public class Solution {
+    public static void drawHourglass(int n) {
         // Your code here
         
-    }
-    
-    public int getFood() {
-        return currentFood;
     }
     
     public static void main(String[] args) {
-        Feeder feeder = new Feeder(1000);
-        System.out.println("Initial food: " + feeder.getFood());
-        feeder.simulateOneDay(5);
-        System.out.println("After day 1: " + feeder.getFood());
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        drawHourglass(n);
+        scanner.close();
     }
 }
 `,
             cpp: `#include <iostream>
-#include <cstdlib>
-#include <ctime>
 using namespace std;
 
-class Feeder {
-private:
-    int currentFood;
+void drawHourglass(int n) {
+    // Your code here
     
-public:
-    Feeder(int initialFood = 0) : currentFood(initialFood) {
-        srand(time(0));
-    }
-    
-    void simulateOneDay(int numBirds) {
-        // Your code here
-        
-    }
-    
-    int getFood() {
-        return currentFood;
-    }
-};
+}
 
 int main() {
-    Feeder feeder(1000);
-    cout << "Initial food: " << feeder.getFood() << endl;
-    feeder.simulateOneDay(5);
-    cout << "After day 1: " << feeder.getFood() << endl;
-    
+    int n;
+    cin >> n;
+    drawHourglass(n);
     return 0;
 }
 `
@@ -1274,18 +1283,22 @@ int main() {
         difficulty: "hard",
         description: `
             <h2>Problem Description</h2>
-            <p>A Latin Square is an n × n grid filled with n different symbols, where each symbol appears exactly once in each row and exactly once in each column.</p>
-            <p>Given a partially filled n × n grid, complete it to form a valid Latin Square, or determine that it's impossible.</p>
+            <p>A <strong>Latin Square</strong> is an n × n grid filled with n different symbols (in this problem, the numbers 1 through n), where:</p>
+            <ul>
+                <li>Each number appears <strong>exactly once</strong> in each row</li>
+                <li>Each number appears <strong>exactly once</strong> in each column</li>
+            </ul>
+            <p>Given a partially filled n × n grid, your task is to complete it to form a valid Latin Square, or determine that it's impossible.</p>
 
             <h2>Input Format</h2>
-            <p>First line: n (size of the grid)</p>
-            <p>Next n lines: each contains n integers. 0 indicates an empty cell, other values (1 to n) are pre-filled.</p>
+            <p>First line: n (size of the grid, where 1 ≤ n ≤ 9)</p>
+            <p>Next n lines: each contains n digits (no spaces). <code>0</code> indicates an empty cell that needs to be filled. Values <code>1</code> to <code>n</code> are pre-filled cells.</p>
 
             <h2>Output Format</h2>
-            <p>Print the completed Latin Square, or "impossible" if no valid completion exists.</p>
+            <p>Print the completed Latin Square (n lines, each with n digits, no spaces), or print <code>impossible</code> if no valid completion exists.</p>
 
             <div class="example-box">
-                <h4>Example</h4>
+                <h4>Example 1</h4>
                 <pre>Input:
 4
 1432
@@ -1298,6 +1311,48 @@ Output:
 2314
 3241
 4123</pre>
+                <p><em>Explanation: The last row must be 4123 because each column needs its missing number (4, 1, 2, 3 respectively).</em></p>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2</h4>
+                <pre>Input:
+3
+120
+201
+012
+
+Output:
+123
+231
+312</pre>
+                <p><em>Explanation: Fill each 0 with the number missing from its row and column.</em></p>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3</h4>
+                <pre>Input:
+3
+110
+000
+000
+
+Output:
+impossible</pre>
+                <p><em>Explanation: The first row has two 1's, which violates the Latin Square rule (each number once per row).</em></p>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 4</h4>
+                <pre>Input:
+2
+00
+00
+
+Output:
+12
+21</pre>
+                <p><em>Explanation: A simple 2×2 Latin Square. (Note: 21/12 would also be valid.)</em></p>
             </div>
         `,
         starterCode: {
@@ -1775,37 +1830,130 @@ int main() {
     },
     {
         id: 17,
-        title: "Sliding-Board Message",
+        title: "Trianglia Treasure",
         difficulty: "hard",
         description: `
             <h2>Problem Description</h2>
-            <p>A sliding board displays messages by sliding characters from right to left.</p>
-            <p>Given two message sequences and their display patterns, determine if they could have been produced by the same sliding board configuration.</p>
+            <p>In the mystical land of Trianglia, a treasure map has been discovered! The map shows several non-overlapping triangles, and <strong>X marks the spot</strong> where the treasure might be hidden.</p>
+            <p>Your task is to write a program to determine if any of the triangles on the map contains the treasure point.</p>
 
-            <h2>Input Format</h2>
-            <p>Two lines, each containing a sequence of characters representing the visible portion of each message at a given time.</p>
+            <h2>Formula</h2>
+            <p>To find the area of a triangle given its three vertices (x₁, y₁), (x₂, y₂), and (x₃, y₃), use:</p>
+            <div class="formula">Area = ½ |x₁(y₂ - y₃) + x₂(y₃ - y₁) + x₃(y₁ - y₂)|</div>
+            <p><em>Hint: A point is inside a triangle if the sum of areas of 3 smaller triangles (formed with the point) equals the original triangle's area.</em></p>
 
-            <h2>Output Format</h2>
-            <p>Print "yes" if the sequences could come from the same board, "no" otherwise.</p>
+            <h2>Input</h2>
+            <p>One or more lines defining triangles, each with:</p>
+            <ul>
+                <li>Triangle name followed by colon and three coordinate pairs: <code>name: (x1,y1),(x2,y2),(x3,y3)</code></li>
+            </ul>
+            <p>Finally, a last line defining point X: <code>X: (px,py)</code></p>
+            <p>All coordinates are integers (can be negative).</p>
+
+            <h2>Output</h2>
+            <p>If a triangle contains point X, print: <code>Triangle [name] contains point X.</code></p>
+            <p>Otherwise, print: <code>No triangle contains point X.</code></p>
 
             <div class="example-box">
-                <h4>Example</h4>
+                <h4>Example 1</h4>
                 <pre>Input:
-HELLO
-WORLD
+T1: (-3,4),(-1,3),(-2,1)
+T2: (1,1),(3,1),(2,3)
+T3: (1,-1),(4,-1),(2,-3)
+T4: (-3,-1),(-1,-1),(-2,-3)
+X: (2,-1)
 
 Output:
-yes</pre>
+Triangle T3 contains point X.</pre>
+                <p><em>Explanation: Point (2,-1) lies on the edge of triangle T3.</em></p>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 2</h4>
+                <pre>Input:
+T1: (-3,4),(-1,3),(-2,1)
+T2: (1,1),(3,1),(2,3)
+X: (0,2)
+
+Output:
+No triangle contains point X.</pre>
+                <p><em>Explanation: Point (0,2) is outside both triangles.</em></p>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 3</h4>
+                <pre>Input:
+Bermudas: (-3,4),(-1,3),(-2,1)
+X: (-2,2)
+
+Output:
+Triangle Bermudas contains point X.</pre>
+                <p><em>Explanation: Point (-2,2) is inside the Bermudas triangle.</em></p>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 4</h4>
+                <pre>Input:
+A: (0,0),(6,0),(3,6)
+X: (3,2)
+
+Output:
+Triangle A contains point X.</pre>
+                <p><em>Explanation: Point (3,2) is clearly inside triangle A.</em></p>
+            </div>
+
+            <div class="example-box">
+                <h4>Example 5</h4>
+                <pre>Input:
+Left: (0,0),(2,0),(1,2)
+Right: (4,0),(6,0),(5,2)
+X: (3,1)
+
+Output:
+No triangle contains point X.</pre>
+                <p><em>Explanation: Point (3,1) falls between the two triangles.</em></p>
             </div>
         `,
         starterCode: {
-            python: `def check_sliding_board():
-    seq1 = input().strip()
-    seq2 = input().strip()
+            python: `import sys
+import re
+
+def triangle_area(x1, y1, x2, y2, x3, y3):
+    return abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2
+
+def point_in_triangle(px, py, x1, y1, x2, y2, x3, y3):
+    # Your code here
+    pass
+
+def parse_coords(coord_str):
+    # Parse "(x,y)" format and return x, y as integers
+    nums = re.findall(r'-?\\d+', coord_str)
+    return [int(n) for n in nums]
+
+def find_treasure():
+    triangles = []
+    px, py = 0, 0
+    
+    for line in sys.stdin:
+        line = line.strip()
+        if not line:
+            continue
+        # Split by colon to get name and coordinates
+        parts = line.split(':')
+        name = parts[0].strip()
+        coords_part = parts[1].strip()
+        
+        if name == 'X':
+            coords = parse_coords(coords_part)
+            px, py = coords[0], coords[1]
+            break
+        else:
+            coords = parse_coords(coords_part)
+            triangles.append((name, coords))
     
     # Your code here
 
-check_sliding_board()
+find_treasure()
 `,
             javascript: `const readline = require('readline');
 const rl = readline.createInterface({
@@ -1813,27 +1961,92 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
+function triangleArea(x1, y1, x2, y2, x3, y3) {
+    return Math.abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2;
+}
+
+function pointInTriangle(px, py, x1, y1, x2, y2, x3, y3) {
+    // Your code here
+}
+
+function parseCoords(coordStr) {
+    // Parse "(x,y),(x,y),..." format and return array of integers
+    const nums = coordStr.match(/-?\\d+/g);
+    return nums.map(Number);
+}
+
 const lines = [];
 rl.on('line', (line) => {
     lines.push(line.trim());
-    if (lines.length === 2) {
-        const seq1 = lines[0];
-        const seq2 = lines[1];
+});
+
+rl.on('close', () => {
+    const triangles = [];
+    let px, py;
+    
+    for (const line of lines) {
+        if (!line) continue;
+        const [name, coordsPart] = line.split(':').map(s => s.trim());
+        const coords = parseCoords(coordsPart);
         
-        // Your code here
-        
-        rl.close();
+        if (name === 'X') {
+            px = coords[0];
+            py = coords[1];
+        } else {
+            triangles.push({ name, coords });
+        }
     }
+    
+    // Your code here
+    
 });
 `,
             java: `import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Solution {
+    public static double triangleArea(int x1, int y1, int x2, int y2, int x3, int y3) {
+        return Math.abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0;
+    }
+    
+    public static boolean pointInTriangle(int px, int py, int x1, int y1, int x2, int y2, int x3, int y3) {
+        // Your code here
+        return false;
+    }
+    
+    public static int[] parseCoords(String coordStr) {
+        Pattern pattern = Pattern.compile("-?\\\\d+");
+        Matcher matcher = pattern.matcher(coordStr);
+        ArrayList<Integer> nums = new ArrayList<>();
+        while (matcher.find()) {
+            nums.add(Integer.parseInt(matcher.group()));
+        }
+        return nums.stream().mapToInt(i -> i).toArray();
+    }
+    
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        ArrayList<Object[]> triangles = new ArrayList<>();
+        int px = 0, py = 0;
         
-        String seq1 = scanner.nextLine().trim();
-        String seq2 = scanner.nextLine().trim();
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine().trim();
+            if (line.isEmpty()) break;
+            String[] parts = line.split(":");
+            String name = parts[0].trim();
+            String coordsPart = parts[1].trim();
+            int[] coords = parseCoords(coordsPart);
+            
+            if (name.equals("X")) {
+                px = coords[0];
+                py = coords[1];
+                break;
+            } else {
+                triangles.add(new Object[]{name, coords});
+            }
+        }
         
         // Your code here
         
@@ -1842,13 +2055,57 @@ public class Solution {
 }
 `,
             cpp: `#include <iostream>
+#include <vector>
 #include <string>
+#include <regex>
+#include <cmath>
 using namespace std;
 
+double triangleArea(int x1, int y1, int x2, int y2, int x3, int y3) {
+    return abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0;
+}
+
+bool pointInTriangle(int px, int py, int x1, int y1, int x2, int y2, int x3, int y3) {
+    // Your code here
+    return false;
+}
+
+vector<int> parseCoords(const string& coordStr) {
+    regex numPattern("-?\\\\d+");
+    vector<int> coords;
+    sregex_iterator it(coordStr.begin(), coordStr.end(), numPattern);
+    sregex_iterator end;
+    while (it != end) {
+        coords.push_back(stoi(it->str()));
+        ++it;
+    }
+    return coords;
+}
+
 int main() {
-    string seq1, seq2;
-    getline(cin, seq1);
-    getline(cin, seq2);
+    vector<pair<string, vector<int>>> triangles;
+    string line;
+    int px, py;
+    
+    while (getline(cin, line)) {
+        if (line.empty()) break;
+        size_t colonPos = line.find(':');
+        string name = line.substr(0, colonPos);
+        // Trim whitespace from name
+        name.erase(0, name.find_first_not_of(" "));
+        name.erase(name.find_last_not_of(" ") + 1);
+        
+        string coordsPart = line.substr(colonPos + 1);
+        vector<int> coords = parseCoords(coordsPart);
+        
+        if (name == "X") {
+            px = coords[0];
+            py = coords[1];
+            break;
+        } else {
+            triangles.push_back({name, coords});
+        }
+    }
     
     // Your code here
     
