@@ -582,26 +582,26 @@ async function runWithPiston(code, language) {
 // Get example input based on problem ID
 function getExampleInput(problemId) {
     const examples = {
-        1: '7\n4\n8',
-        2: '12\n30\n9',
-        3: '1274\n38692\n53\n9358\n790\n55438\n680\n3626\n98643\n1650\n765444\n7',
-        4: 'he\njumped\nup',
-        5: 'a quick brown fox jumped over her lazy dog',
-        6: '22',
-        7: '40\n6',
-        8: '(array input - see problem description)',
-        9: '(class implementation - see problem description)',
-        10: '4\n13\n7',
-        11: '4',
-        12: '(grid navigation - see problem description)',
-        13: '4\n1 4 3 2\n2 3 1 4\n3 2 4 1\n0 0 0 0',
-        14: 'aabxbaa',
-        15: '(array input - see problem description)',
-        16: '(tower coverage - see problem description)',
-        17: 'T1: (-3,4),(-1,3),(-2,1)\nT2: (1,1),(3,1),(2,3)\nX: (2,-1)',
-        18: 'abcabcbb',
-        19: '0,1,0,2,1,0,1,3,2,1,2,1',
-        20: '(linked lists - see problem description)'
+        1: '7\n4\n8',                          // Electric
+        2: '12\n30\n9',                        // Multi-Tips
+        3: '1274\n38692\n53\n9358\n790\n55438\n680\n3626\n98643\n1650\n765444\n7',  // Number Validator
+        4: 'he\njumped\nup',                   // Speak Backwards
+        5: 'a quick brown fox jumped over her lazy dog',  // Missing Letters
+        6: '22',                               // Double Double
+        7: '40\n6',                            // Strike Out Zeroes
+        8: '2 7 11 15\n9',                     // Two Sum
+        9: '()[]{}',                           // Valid Parentheses
+        10: '7 1 5 3 6 4',                     // Best Time to Buy and Sell Stock
+        11: '4',                               // Hourglass
+        12: '(grid navigation - see problem description)',  // Honeycomb Route
+        13: '4\n1 4 3 2\n2 3 1 4\n3 2 4 1\n0 0 0 0',  // Latin Square Completion
+        14: 'aabxbaa',                         // Recursive Palindrome Cleanup
+        15: '3 2 2 3\n3',                      // Remove Element
+        16: '(tower coverage - see problem description)',  // Signal Tower Coverage
+        17: 'T1: (-3,4),(-1,3),(-2,1)\nT2: (1,1),(3,1),(2,3)\nX: (2,-1)',  // Trianglia Treasure
+        18: 'abcabcbb',                        // Longest Substring Without Repeating Characters
+        19: '0,1,0,2,1,0,1,3,2,1,2,1',         // Trapping Rain Water
+        20: '(linked lists - see problem description)'  // Merge K Sorted Lists
     };
     return examples[problemId] || '(see problem description)';
 }
