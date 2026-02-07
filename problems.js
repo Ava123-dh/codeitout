@@ -1356,15 +1356,12 @@ Output:
             </div>
         `,
         starterCode: {
-            python: `import sys
-
-def solve_latin_square():
-    lines = sys.stdin.read().strip().split('\\n')
-    n = int(lines[0])
+            python: `def solve_latin_square():
+    n = int(input())
     grid = []
     
-    for i in range(1, n + 1):
-        row = list(map(int, lines[i].split()))
+    for _ in range(n):
+        row = list(map(int, input().split()))
         grid.append(row)
     
     def is_valid(row, col, num):
@@ -1917,8 +1914,7 @@ No triangle contains point X.</pre>
             </div>
         `,
         starterCode: {
-            python: `import sys
-import re
+            python: `import re
 
 def triangle_area(x1, y1, x2, y2, x3, y3):
     return abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2
@@ -1933,12 +1929,15 @@ def parse_coords(coord_str):
     return [int(n) for n in nums]
 
 def find_treasure():
-    lines = sys.stdin.read().strip().split('\\n')
     triangles = []
     px, py = 0, 0
     
-    for line in lines:
-        line = line.strip()
+    # Read all lines until we find X
+    while True:
+        try:
+            line = input().strip()
+        except EOFError:
+            break
         if not line:
             continue
         # Split by colon to get name and coordinates
@@ -1949,6 +1948,7 @@ def find_treasure():
         if name == 'X':
             coords = parse_coords(coords_part)
             px, py = coords[0], coords[1]
+            break
         else:
             coords = parse_coords(coords_part)
             triangles.append((name, coords))
