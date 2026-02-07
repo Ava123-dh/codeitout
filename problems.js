@@ -1292,40 +1292,40 @@ int main() {
 
             <h2>Input Format</h2>
             <p>First line: n (size of the grid, where 1 ≤ n ≤ 9)</p>
-            <p>Next n lines: each contains n digits (no spaces). <code>0</code> indicates an empty cell that needs to be filled. Values <code>1</code> to <code>n</code> are pre-filled cells.</p>
+            <p>Next n lines: each contains n space-separated integers. <code>0</code> indicates an empty cell that needs to be filled. Values <code>1</code> to <code>n</code> are pre-filled cells.</p>
 
             <h2>Output Format</h2>
-            <p>Print the completed Latin Square (n lines, each with n digits, no spaces), or print <code>impossible</code> if no valid completion exists.</p>
+            <p>Print the completed Latin Square (n lines, each with n space-separated integers), or print <code>impossible</code> if no valid completion exists.</p>
 
             <div class="example-box">
                 <h4>Example 1</h4>
                 <pre>Input:
 4
-1432
-2314
-3241
-0000
+1 4 3 2
+2 3 1 4
+3 2 4 1
+0 0 0 0
 
 Output:
-1432
-2314
-3241
-4123</pre>
-                <p><em>Explanation: The last row must be 4123 because each column needs its missing number (4, 1, 2, 3 respectively).</em></p>
+1 4 3 2
+2 3 1 4
+3 2 4 1
+4 1 2 3</pre>
+                <p><em>Explanation: The last row must be 4 1 2 3 because each column needs its missing number.</em></p>
             </div>
 
             <div class="example-box">
                 <h4>Example 2</h4>
                 <pre>Input:
 3
-120
-201
-012
+1 2 0
+2 0 1
+0 1 2
 
 Output:
-123
-231
-312</pre>
+1 2 3
+2 3 1
+3 1 2</pre>
                 <p><em>Explanation: Fill each 0 with the number missing from its row and column.</em></p>
             </div>
 
@@ -1333,9 +1333,9 @@ Output:
                 <h4>Example 3</h4>
                 <pre>Input:
 3
-110
-000
-000
+1 1 0
+0 0 0
+0 0 0
 
 Output:
 impossible</pre>
@@ -1346,13 +1346,13 @@ impossible</pre>
                 <h4>Example 4</h4>
                 <pre>Input:
 2
-00
-00
+0 0
+0 0
 
 Output:
-12
-21</pre>
-                <p><em>Explanation: A simple 2×2 Latin Square. (Note: 21/12 would also be valid.)</em></p>
+1 2
+2 1</pre>
+                <p><em>Explanation: A simple 2×2 Latin Square. (Note: 2 1 / 1 2 would also be valid.)</em></p>
             </div>
         `,
         starterCode: {
@@ -1364,7 +1364,7 @@ def solve_latin_square():
     grid = []
     
     for i in range(1, n + 1):
-        row = [int(c) for c in lines[i].strip()]
+        row = list(map(int, lines[i].split()))
         grid.append(row)
     
     def is_valid(row, col, num):
@@ -1377,7 +1377,7 @@ def solve_latin_square():
     
     if solve(0, 0):
         for row in grid:
-            print(''.join(map(str, row)))
+            print(' '.join(map(str, row)))
     else:
         print("impossible")
 
@@ -1399,7 +1399,7 @@ rl.on('close', () => {
     const grid = [];
     
     for (let i = 1; i <= n; i++) {
-        grid.push(lines[i].split('').map(Number));
+        grid.push(lines[i].split(' ').map(Number));
     }
     
     function isValid(row, col, num) {
@@ -1412,7 +1412,7 @@ rl.on('close', () => {
     
     if (solve(0, 0)) {
         for (const row of grid) {
-            console.log(row.join(''));
+            console.log(row.join(' '));
         }
     } else {
         console.log("impossible");
@@ -1432,18 +1432,19 @@ public class Solution {
         grid = new int[n][n];
         
         for (int i = 0; i < n; i++) {
-            String row = scanner.next();
             for (int j = 0; j < n; j++) {
-                grid[i][j] = row.charAt(j) - '0';
+                grid[i][j] = scanner.nextInt();
             }
         }
         
         if (solve(0, 0)) {
             for (int[] row : grid) {
-                for (int num : row) {
-                    System.out.print(num);
+                StringBuilder sb = new StringBuilder();
+                for (int j = 0; j < row.length; j++) {
+                    if (j > 0) sb.append(" ");
+                    sb.append(row[j]);
                 }
-                System.out.println();
+                System.out.println(sb);
             }
         } else {
             System.out.println("impossible");
@@ -1465,7 +1466,6 @@ public class Solution {
 `,
             cpp: `#include <iostream>
 #include <vector>
-#include <string>
 using namespace std;
 
 int n;
@@ -1486,17 +1486,16 @@ int main() {
     grid.resize(n, vector<int>(n));
     
     for (int i = 0; i < n; i++) {
-        string row;
-        cin >> row;
         for (int j = 0; j < n; j++) {
-            grid[i][j] = row[j] - '0';
+            cin >> grid[i][j];
         }
     }
     
     if (solve(0, 0)) {
         for (const auto& row : grid) {
-            for (int num : row) {
-                cout << num;
+            for (int j = 0; j < row.size(); j++) {
+                if (j > 0) cout << " ";
+                cout << row[j];
             }
             cout << endl;
         }
@@ -1934,10 +1933,11 @@ def parse_coords(coord_str):
     return [int(n) for n in nums]
 
 def find_treasure():
+    lines = sys.stdin.read().strip().split('\\n')
     triangles = []
     px, py = 0, 0
     
-    for line in sys.stdin:
+    for line in lines:
         line = line.strip()
         if not line:
             continue
@@ -1949,7 +1949,6 @@ def find_treasure():
         if name == 'X':
             coords = parse_coords(coords_part)
             px, py = coords[0], coords[1]
-            break
         else:
             coords = parse_coords(coords_part)
             triangles.append((name, coords))
