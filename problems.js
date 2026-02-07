@@ -1356,12 +1356,15 @@ Output:
             </div>
         `,
         starterCode: {
-            python: `def solve_latin_square():
-    n = int(input())
+            python: `import sys
+
+def solve_latin_square():
+    lines = sys.stdin.read().strip().split('\\n')
+    n = int(lines[0])
     grid = []
     
-    for _ in range(n):
-        row = [int(c) for c in input().strip()]
+    for i in range(1, n + 1):
+        row = [int(c) for c in lines[i].strip()]
         grid.append(row)
     
     def is_valid(row, col, num):
