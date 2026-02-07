@@ -597,7 +597,7 @@ function getExampleInput(problemId) {
         13: '4\n1 4 3 2\n2 3 1 4\n3 2 4 1\n0 0 0 0',  // Latin Square Completion
         14: 'aabxbaa',                         // Recursive Palindrome Cleanup
         15: '3 2 2 3\n3',                      // Remove Element
-        16: '(tower coverage - see problem description)',  // Signal Tower Coverage
+        16: '6\n2\n5 1 4 9 2 3', // Signal Tower Coverage
         17: 'T1: (-3,4),(-1,3),(-2,1)\nT2: (1,1),(3,1),(2,3)\nX: (2,-1)',  // Trianglia Treasure
         18: 'abcabcbb',                        // Longest Substring Without Repeating Characters
         19: '0,1,0,2,1,0,1,3,2,1,2,1',         // Trapping Rain Water
